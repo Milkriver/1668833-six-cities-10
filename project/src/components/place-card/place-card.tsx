@@ -8,12 +8,12 @@ type PlaceCardProps = {
   bookmark: boolean,
   rating: number,
 };
-const renderPremiumLabel = (premium: boolean) => {
-  if (premium) { return <div className="place-card__mark"><span>Premium</span></div>; }
-  return '';
-};
 
 function PlaceCard({ id, name, type, premium, image, price, bookmark, rating }: PlaceCardProps): JSX.Element {
+  const renderPremiumLabel = (isCardPremium: boolean) => {
+    if (isCardPremium) { return <div className="place-card__mark"><span>Premium</span></div>; }
+    return '';
+  };
   return (
     <article className="cities__card place-card">
       {renderPremiumLabel(premium)}

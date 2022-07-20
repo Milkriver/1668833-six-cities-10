@@ -2,19 +2,9 @@ import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
 import PlaceCard from '../../components/place-card/place-card';
 import SortType from '../../components/sort-type/sort-type';
+import { SingleFlat } from '../../types/single-flat';
 
-const locationList = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
-
-type SingleFlat = {
-  id: number,
-  name: string,
-  type: string,
-  premium: boolean,
-  image: string,
-  price: number,
-  bookmark: boolean,
-  rating: number,
-};
+const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
 
 type TypeProps = {
   flats: SingleFlat[]
@@ -35,7 +25,7 @@ function MainPage(props: TypeProps): JSX.Element {
                   <span>Amsterdam</span>
                 </a>
               </li>
-              {locationList.map((location) => <LocationItem key={location} location={location} />)}
+              {locations.map((location) => <LocationItem key={location} location={location} />)}
             </ul>
           </section>
         </div>
