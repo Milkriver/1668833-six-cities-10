@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
-import OfferCard from '../../components/offer-card/offer-card';
+import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
 import { Offers } from '../../types/offer';
 
@@ -36,25 +36,7 @@ function MainPage(props: MainPageProps): JSX.Element {
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer) => (
-                  <OfferCard
-                    id={offer.id}
-                    name={offer.name}
-                    type={offer.type}
-                    premium={offer.premium}
-                    image={offer.image}
-                    price={offer.price}
-                    bookmark={offer.bookmark}
-                    rating={offer.rating}
-                    bedrooms={offer.bedrooms}
-                    guests={offer.guests}
-                    options={offer.options}
-                    host={offer.host}
-                    reviews={offer.reviews}
-                    description={offer.description}
-                    key={offer.id}
-                  />
-                ))}
+                <OfferList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">

@@ -13,7 +13,8 @@ type AppProps = {
 }
 
 
-function App({offers}: AppProps): JSX.Element {
+function App({ offers }: AppProps): JSX.Element {
+
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +24,7 @@ function App({offers}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<OfferPage />}
+          element={<OfferPage offers={offers} offer={offers[0]} />}
         />
         <Route
           path={AppRoute.Favorites}

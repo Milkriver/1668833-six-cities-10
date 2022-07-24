@@ -6,7 +6,7 @@ export const offers:Offers = [
     image: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
     premium: true,
     bookmark: false,
-    name: 'Beautiful & amp; luxurious apartment at great location',
+    name: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     price: 120,
     rating: 4.8,
