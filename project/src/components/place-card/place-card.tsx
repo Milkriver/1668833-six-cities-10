@@ -1,15 +1,9 @@
-type PlaceCardProps = {
-  id: number,
-  name: string,
-  type: string,
-  premium: boolean,
-  image: string,
-  price: number,
-  bookmark: boolean,
-  rating: number,
-};
+import { Offer } from '../../types/offer';
 
-function PlaceCard({ id, name, type, premium, image, price, bookmark, rating }: PlaceCardProps): JSX.Element {
+type PlaceCardProps = Offer;
+
+function PlaceCard(props: PlaceCardProps): JSX.Element {
+  const { name, type, premium, price, image, bookmark } = props;
   return (
     <article className="cities__card place-card">
       {premium && (
@@ -18,7 +12,7 @@ function PlaceCard({ id, name, type, premium, image, price, bookmark, rating }: 
         </div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <link href="#" />
-        <img className="place-card__image" src={image} width="260" height="200" alt="PlaceImage" />
+        <img className="place-card__image" src={image[0]} width="260" height="200" alt="PlaceImage" />
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
