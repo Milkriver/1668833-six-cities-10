@@ -10,13 +10,12 @@ type PlaceCardProps = {
 };
 
 function PlaceCard({ id, name, type, premium, image, price, bookmark, rating }: PlaceCardProps): JSX.Element {
-  const renderPremiumLabel = (isCardPremium: boolean) => {
-    if (isCardPremium) { return <div className="place-card__mark"><span>Premium</span></div>; }
-    return '';
-  };
   return (
     <article className="cities__card place-card">
-      {renderPremiumLabel(premium)}
+      {premium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>)}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <link href="#" />
         <img className="place-card__image" src={image} width="260" height="200" alt="PlaceImage" />
