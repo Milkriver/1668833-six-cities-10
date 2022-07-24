@@ -2,6 +2,7 @@ import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
 import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
+import { CardStatus } from '../../const';
 import { Offers } from '../../types/offer';
 
 const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
@@ -36,7 +37,7 @@ function MainPage(props: MainPageProps): JSX.Element {
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} />
+                <OfferList offers={offers} offerStatus={CardStatus.MainList}/>
               </div>
             </section>
             <div className="cities__right-section">

@@ -1,20 +1,60 @@
 import { Offer } from '../../types/offer';
 
-type OfferCardProps = Offer;
-
+type OfferCardProps = {
+  offer: Offer;
+  offerStatus: string;
+}
+const renderTypes = {
+  main: {
+    cardType: 'cities__card',
+    imageType: 'cities__image-wrapper',
+    cardInfo: '',
+    imageWidth: '260',
+    imageHeight: '200',
+  },
+  favorite: {
+    cardType: 'favorites__card',
+    imageType: 'favorites__image-wrapper',
+    cardInfo: '',
+    imageWidth: '150',
+    imageHeight: '110',
+  },
+  near: {
+    cardType: 'near-places__card',
+    imageType: 'near-places__image-wrapper',
+    cardInfo: 'favorites__card-info',
+    imageWidth: '260',
+    imageHeight: '200',
+  },
+};
 function OfferCard(props: OfferCardProps): JSX.Element {
-  const { name, type, premium, price, image, bookmark } = props;
+  const { offer, offerStatus } = props;
+  const { name, type, premium, price, image, bookmark } = offer;
+  let renderCard;
+  switch (offerStatus) {
+    case 'MAIN':
+      renderCard = renderTypes.main;
+      break;
+    case 'FAVORITES':
+      renderCard = renderTypes.favorite;
+      break;
+    case 'NEAR':
+      renderCard = renderTypes.near;
+      break;
+    default:
+      throw new Error('Тип не определен');
+  }
   return (
-    <article className="cities__card place-card">
+    <article className={`${renderCard.cardType} place-card`} >
       {premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>)}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${renderCard.imageType} place-card__image-wrapper`}>
         <link href="#" />
-        <img className="place-card__image" src={image[0]} width="260" height="200" alt="PlaceImage" />
+        <img className="place-card__image" src={image[0]} width={renderCard.imageWidth} height={renderCard.imageHeight} alt="PlaceImage" />
       </div>
-      <div className="place-card__info">
+      <div className={`${renderCard.cardInfo} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>

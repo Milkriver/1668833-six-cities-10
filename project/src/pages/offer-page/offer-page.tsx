@@ -1,6 +1,7 @@
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
+import { CardStatus } from '../../const';
 import { Offer, Offers } from '../../types/offer';
 
 type OfferPageProps = {
@@ -11,8 +12,6 @@ type OfferPageProps = {
 function OfferPage(props: OfferPageProps): JSX.Element {
   const { offer, offers } = props;
   const { bedrooms, bookmark, description, guests, host, image, name, options, premium, price, rating, reviews, type } = offer;
-  // eslint-disable-next-line no-console
-  console.log(offers, reviews);
   return (
     <div className="page">
       <Header />
@@ -116,7 +115,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers}/>
+              <OfferList offers={offers} offerStatus={CardStatus.NearPlace}/>
             </div>
           </section>
         </div>

@@ -11,3 +11,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum CardStatus {
+  MainList = 'MAIN',
+  Favorites = 'FAVORITES',
+  NearPlace = 'NEAR',
+}

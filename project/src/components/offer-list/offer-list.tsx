@@ -3,28 +3,17 @@ import OfferCard from '../offer-card/offer-card';
 
 type OfferListProps = {
   offers: Offers;
+  offerStatus: string;
 };
 
 function OfferList(props: OfferListProps): JSX.Element {
-  const { offers } = props;
+  const { offers, offerStatus } = props;
   return (
     <>
       {offers.map((offer) => (
         <OfferCard
-          id={offer.id}
-          name={offer.name}
-          type={offer.type}
-          premium={offer.premium}
-          image={offer.image}
-          price={offer.price}
-          bookmark={offer.bookmark}
-          rating={offer.rating}
-          bedrooms={offer.bedrooms}
-          guests={offer.guests}
-          options={offer.options}
-          host={offer.host}
-          reviews={offer.reviews}
-          description={offer.description}
+          offer={offer}
+          offerStatus={offerStatus}
           key={offer.id}
         />
       ))}
