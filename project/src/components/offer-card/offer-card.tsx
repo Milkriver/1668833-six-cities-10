@@ -1,8 +1,8 @@
 import { Offer } from '../../types/offer';
 
-type PlaceCardProps = Offer;
+type OfferCardProps = Offer;
 
-function PlaceCard(props: PlaceCardProps): JSX.Element {
+function OfferCard(props: OfferCardProps): JSX.Element {
   const { name, type, premium, price, image, bookmark } = props;
   return (
     <article className="cities__card place-card">
@@ -43,4 +43,4 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
 }
 
 
-export default PlaceCard;
+export default OfferCard;

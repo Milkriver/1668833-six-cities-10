@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
-import PlaceCard from '../../components/place-card/place-card';
+import OfferCard from '../../components/offer-card/offer-card';
 import SortType from '../../components/sort-type/sort-type';
 import { Offers } from '../../types/offer';
 
@@ -37,7 +37,7 @@ function MainPage(props: MainPageProps): JSX.Element {
               <SortType />
               <div className="cities__places-list places__list tabs__content">
                 {offers.map((offer) => (
-                  <PlaceCard
+                  <OfferCard
                     id={offer.id}
                     name={offer.name}
                     type={offer.type}
