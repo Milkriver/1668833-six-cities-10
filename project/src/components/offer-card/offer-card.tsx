@@ -1,8 +1,12 @@
+import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
+import { useNavigate } from 'react-router-dom';
 
 type OfferCardProps = {
   offer: Offer;
   offerStatus: string;
+  onMouseOver: (id: number | undefined) => void;
+  activeCardId: number | undefined
 }
 const renderTypes = {
   main: {
@@ -28,8 +32,8 @@ const renderTypes = {
   },
 };
 function OfferCard(props: OfferCardProps): JSX.Element {
-  const { offer, offerStatus } = props;
-  const { name, type, premium, price, image, bookmark } = offer;
+  const { offer, offerStatus, onMouseOver, activeCardId } = props;
+  const { name, type, premium, price, image, bookmark, id } = offer;
   let renderCard;
   switch (offerStatus) {
     case 'MAIN':
@@ -44,8 +48,15 @@ function OfferCard(props: OfferCardProps): JSX.Element {
     default:
       throw new Error('Тип не определен');
   }
+  const navigate = useNavigate();
+  const onClick = () => {
+    if (activeCardId === undefined) {
+      return;
+    }
+    navigate(AppRoute.Room);
+  };
   return (
-    <article className={`${renderCard.cardType} place-card`} >
+    <article className={`${renderCard.cardType} place-card`} onClick={onClick} onMouseEnter={() => onMouseOver(id)}>
       {premium && (
         <div className="place-card__mark">
           <span>Premium</span>
