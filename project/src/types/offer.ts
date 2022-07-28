@@ -1,15 +1,4 @@
-export type SingleFlat = {
-  id: number,
-  name: string,
-  type: string,
-  premium: boolean,
-  image: string,
-  price: number,
-  bookmark: boolean,
-  rating: number,
-};
-
-export type SingleFlatPage = {
+export type Offer = {
   id: number,
   name: string,
   type: string,
@@ -32,8 +21,11 @@ export type SingleFlatPage = {
       avatar: string,
       name: string,
       text: string,
-      date: Date,
+      date: string,
       rating: number,
     }
   ],
 };
+
+export type Offers = Offer[];
+

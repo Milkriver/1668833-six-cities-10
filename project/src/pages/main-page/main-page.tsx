@@ -1,17 +1,18 @@
 import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
-import PlaceCard from '../../components/place-card/place-card';
+import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
-import { SingleFlat } from '../../types/single-flat';
+import { CardStatus } from '../../const';
+import { Offers } from '../../types/offer';
 
 const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
 
-type TypeProps = {
-  flats: SingleFlat[]
+type MainPageProps = {
+  offers: Offers;
 };
 
-function MainPage(props: TypeProps): JSX.Element {
-  const { flats } = props;
+function MainPage(props: MainPageProps): JSX.Element {
+  const { offers } = props;
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -36,7 +37,7 @@ function MainPage(props: TypeProps): JSX.Element {
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                {flats.map((flat) => <PlaceCard id={flat.id} name={flat.name} type={flat.type} premium={flat.premium} image={flat.image} price={flat.price} bookmark={flat.bookmark} rating={flat.rating} key={flat.id}/>)}
+                <OfferList offers={offers} offerStatus={CardStatus.MainList}/>
               </div>
             </section>
             <div className="cities__right-section">
