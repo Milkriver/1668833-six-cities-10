@@ -3,12 +3,12 @@ import LocationItem from '../../components/location-item/location-item';
 import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
 import { CardStatus } from '../../const';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
 
 type MainPageProps = {
-  offers: Offers;
+  offers: Offer[];
 };
 
 function MainPage(props: MainPageProps): JSX.Element {

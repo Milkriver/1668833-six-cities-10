@@ -2,11 +2,11 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
 import { CardStatus } from '../../const';
-import { Offer, Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type OfferPageProps = {
   offer: Offer;
-  offers: Offers;
+  offers: Offer[];
 };
 
 function OfferPage(props: OfferPageProps): JSX.Element {

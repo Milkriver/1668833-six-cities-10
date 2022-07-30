@@ -5,11 +5,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferPage from '../../pages/offer-page/offer-page';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 import PrivateRoute from '../private-route/private-route';
 
 type AppProps = {
-  offers: Offers;
+  offers: Offer[];
 }
 
 
