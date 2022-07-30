@@ -20,7 +20,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                image.map((src) => (<div className="property__image-wrapper" key={src}> <img className="property__image" src={src} alt="PhotoStudio" /> </div>))
+                image.map((src) => (<div className="property__image-wrapper" key={offer.id}> <img className="property__image" src={src} alt="PhotoStudio" /> </div>))
               }
             </div>
           </div>
