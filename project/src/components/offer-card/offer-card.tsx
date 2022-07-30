@@ -49,14 +49,14 @@ function OfferCard(props: OfferCardProps): JSX.Element {
       throw new Error('Тип не определен');
   }
   const navigate = useNavigate();
-  const onClick = () => {
+  const handleArticleClick = () => {
     if (activeCardId === undefined) {
       return;
     }
     navigate(AppRoute.Room);
   };
   return (
-    <article className={`${renderCard.cardType} place-card`} onClick={onClick} onMouseEnter={() => onMouseOver(id)}>
+    <article className={`${renderCard.cardType} place-card`} onClick={handleArticleClick} onMouseEnter={() => onMouseOver(id)}>
       {premium && (
         <div className="place-card__mark">
           <span>Premium</span>
