@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "leaflet": "1.8.0"
-  },
-  "devDependencies": {
-    "@types/leaflet": "1.7.11"
-  }
-}
