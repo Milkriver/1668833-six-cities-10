@@ -7,6 +7,8 @@ export type Offer = {
   price: number,
   bookmark: boolean,
   rating: number,
+  lat: number,
+  lng: number,
   bedrooms: number,
   guests: number,
   options: string[],
