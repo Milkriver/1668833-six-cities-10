@@ -1,6 +1,13 @@
-import { Offers } from '../types/offer';
+import { City, Offer } from '../types/offer';
 
-export const offers:Offers = [
+export const CITY: City = {
+  title: 'Амстердам',
+  lat: 52.370216,
+  lng: 4.895168,
+  zoom: 10,
+};
+
+export const offers: Offer[] = [
   {
     id: 1,
     image: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
@@ -12,6 +19,8 @@ export const offers:Offers = [
     rating: 4.8,
     bedrooms: 3,
     guests: 4,
+    lat: 52.3909553943508,
+    lng: 4.85309666406198,
     options: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
       image: 'img/avatar-angelina.jpg',
@@ -40,6 +49,8 @@ export const offers:Offers = [
     rating: 4,
     bedrooms: 3,
     guests: 4,
+    lat: 52.369553943508,
+    lng: 4.85309666406198,
     options: ['Wi-Fi', 'Heating', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
       image: 'img/avatar-angelina.jpg',
@@ -68,6 +79,8 @@ export const offers:Offers = [
     rating: 4,
     bedrooms: 3,
     guests: 4,
+    lat: 52.3909553943508,
+    lng: 4.929309666406198,
     options: ['Wi-Fi', 'Heating', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
       image: 'img/avatar-angelina.jpg',
@@ -96,6 +109,8 @@ export const offers:Offers = [
     rating: 4,
     bedrooms: 2,
     guests: 2,
+    lat: 52.3809553943508,
+    lng: 4.939309666406198,
     options: ['Wi-Fi', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
       image: 'img/avatar-angelina.jpg',

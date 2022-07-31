@@ -2,15 +2,16 @@ import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
 import { CardStatus } from '../../const';
-import { Offer, Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type OfferPageProps = {
   offer: Offer;
-  offers: Offers;
+  offers: Offer[];
+  offerHoverHandler: (offerName: string) => void;
 };
 
 function OfferPage(props: OfferPageProps): JSX.Element {
-  const { offer, offers } = props;
+  const { offer, offers, offerHoverHandler } = props;
   const { bedrooms, bookmark, description, guests, host, image, name, options, premium, price, rating, reviews, type } = offer;
   return (
     <div className="page">
@@ -20,7 +21,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                image.map((src) => (<div className="property__image-wrapper" key={src}> <img className="property__image" src={src} alt="PhotoStudio" /> </div>))
+                image.map((src) => (<div className="property__image-wrapper" key={offer.id}> <img className="property__image" src={src} alt="PhotoStudio" /> </div>))
               }
             </div>
           </div>
@@ -115,7 +116,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} offerStatus={CardStatus.NearPlace}/>
+              <OfferList offers={offers} offerStatus={CardStatus.NearPlace} offerHoverHandler={offerHoverHandler}/>
             </div>
           </section>
         </div>

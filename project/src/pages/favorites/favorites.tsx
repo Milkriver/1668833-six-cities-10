@@ -2,14 +2,15 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
 import { CardStatus } from '../../const';
-import { Offers } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 type FavoritesProps = {
-  offers: Offers;
+  offers: Offer[];
+  offerHoverHandler: (offerName: string) => void;
 };
 
 function Favorites(props: FavoritesProps): JSX.Element {
-  const { offers } = props;
+  const { offers, offerHoverHandler } = props;
   return (
     <div className="page">
       <Header />
@@ -28,7 +29,7 @@ function Favorites(props: FavoritesProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList offers={offers} offerStatus={CardStatus.Favorites} />
+                  <OfferList offers={offers} offerStatus={CardStatus.Favorites} offerHoverHandler={offerHoverHandler}/>
                 </div>
               </li>
 
@@ -41,7 +42,7 @@ function Favorites(props: FavoritesProps): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList offers={offers} offerStatus={CardStatus.Favorites} />
+                  <OfferList offers={offers} offerStatus={CardStatus.Favorites} offerHoverHandler={offerHoverHandler}/>
                 </div>
               </li>
             </ul>

@@ -7,6 +7,8 @@ export type Offer = {
   price: number,
   bookmark: boolean,
   rating: number,
+  lat: number,
+  lng: number,
   bedrooms: number,
   guests: number,
   options: string[],
@@ -27,5 +29,9 @@ export type Offer = {
   ],
 };
 
-export type Offers = Offer[];
-
+export type City = {
+  title: string,
+  lat: number,
+  lng: number,
+  zoom: number,
+}
