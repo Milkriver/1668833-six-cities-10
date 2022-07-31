@@ -1,18 +1,23 @@
 import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
+import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
 import { CardStatus } from '../../const';
+import { CITY } from '../../mock/offers';
 import { Offer } from '../../types/offer';
 
 const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
 
 type MainPageProps = {
   offers: Offer[];
+  offerHoverHandler: (offerName: string) => void;
+  selectedOffer: Offer | undefined;
 };
 
 function MainPage(props: MainPageProps): JSX.Element {
-  const { offers } = props;
+  const { offers, offerHoverHandler, selectedOffer } = props;
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -37,11 +42,13 @@ function MainPage(props: MainPageProps): JSX.Element {
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} offerStatus={CardStatus.MainList}/>
+                <OfferList offers={offers} offerStatus={CardStatus.MainList} offerHoverHandler={offerHoverHandler} />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={CITY} offers={offers} selectedOffer={selectedOffer}/>
+              </section>
             </div>
           </div>
         </div>

@@ -7,10 +7,11 @@ import { Offer } from '../../types/offer';
 type OfferPageProps = {
   offer: Offer;
   offers: Offer[];
+  offerHoverHandler: (offerName: string) => void;
 };
 
 function OfferPage(props: OfferPageProps): JSX.Element {
-  const { offer, offers } = props;
+  const { offer, offers, offerHoverHandler } = props;
   const { bedrooms, bookmark, description, guests, host, image, name, options, premium, price, rating, reviews, type } = offer;
   return (
     <div className="page">
@@ -115,7 +116,7 @@ function OfferPage(props: OfferPageProps): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} offerStatus={CardStatus.NearPlace}/>
+              <OfferList offers={offers} offerStatus={CardStatus.NearPlace} offerHoverHandler={offerHoverHandler}/>
             </div>
           </section>
         </div>

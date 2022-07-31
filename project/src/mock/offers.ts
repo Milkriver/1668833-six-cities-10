@@ -1,6 +1,13 @@
-import { Offer } from '../types/offer';
+import { City, Offer } from '../types/offer';
 
-export const offers:Offer[] = [
+export const CITY: City = {
+  title: 'Амстердам',
+  lat: 52.370216,
+  lng: 4.895168,
+  zoom: 10,
+};
+
+export const offers: Offer[] = [
   {
     id: 1,
     image: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],

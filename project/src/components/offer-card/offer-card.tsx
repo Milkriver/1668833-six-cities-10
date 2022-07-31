@@ -6,10 +6,11 @@ type OfferCardProps = {
   offer: Offer;
   offerStatus: string;
   onMouseOver: (id: number | undefined) => void;
-  activeCardId: number | undefined
+  activeCardId: number | undefined,
+  onMouseEnter: (offerName: string) => void;
 }
 function OfferCard(props: OfferCardProps): JSX.Element {
-  const { offer, offerStatus, onMouseOver, activeCardId } = props;
+  const { offer, offerStatus, onMouseOver, activeCardId, onMouseEnter } = props;
   let renderCard;
   switch (offerStatus) {
     case 'MAIN':
@@ -32,7 +33,11 @@ function OfferCard(props: OfferCardProps): JSX.Element {
     navigate(AppRoute.Room);
   };
   return (
-    <article className={`${renderCard}card place-card`} onClick={handleArticleClick} onMouseEnter={() => onMouseOver(offer.id)}>
+    <article className={`${renderCard}card place-card`} onClick={handleArticleClick} onMouseEnter={() => {
+      onMouseOver(offer.id);
+      onMouseEnter(offer.name);
+    }}
+    >
       {offer.premium && (
         <div className="place-card__mark">
           <span>Premium</span>
