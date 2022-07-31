@@ -1,5 +1,5 @@
-import {useRef, useEffect} from 'react';
-import {Icon, Marker} from 'leaflet';
+import { useRef, useEffect } from 'react';
+import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { City, Offer } from '../../types/offer';
 import useMap from '../../hooks/use-map';
@@ -24,8 +24,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, offers, selectedOffer} = props;
-
+  const { city, offers, selectedOffer } = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -48,7 +47,7 @@ function Map(props: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <div style={{height: '500px'}} ref={mapRef}></div>;
+  return <div style={{ height: '500px' }} ref={mapRef}></div>;
 }
 
 export default Map;

@@ -2,6 +2,7 @@ import { useEffect, useState, MutableRefObject } from 'react';
 import { Map, TileLayer } from 'leaflet';
 import { City } from '../types/offer';
 
+let isRenderedRef = false;
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
@@ -9,8 +10,9 @@ function useMap(
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
+
   useEffect(() => {
-    if (mapRef.current !== null && map === null) {
+    if (mapRef.current !== null && !isRenderedRef) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: city.lat,
@@ -28,11 +30,11 @@ function useMap(
       );
 
       instance.addLayer(layer);
-
+      isRenderedRef = true;
       setMap(instance);
+
     }
   }, [mapRef, map, city]);
-
   return map;
 }
 
