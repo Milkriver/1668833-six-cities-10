@@ -4,26 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {
   offer: Offer;
-  offerStatus: string;
   onMouseOver: (id: number | undefined) => void;
   activeCardId: number | undefined,
   onMouseEnter: (offerName: string) => void;
+  className: string;
 }
-function OfferCard({ offer, offerStatus, onMouseOver, activeCardId, onMouseEnter }: Props): JSX.Element {
-  let renderCard;
-  switch (offerStatus) {
-    case 'MAIN':
-      renderCard = 'cities__';
-      break;
-    case 'FAVORITES':
-      renderCard = 'favorites__';
-      break;
-    case 'NEAR':
-      renderCard = 'near-places__';
-      break;
-    default:
-      throw new Error('Тип не определен');
-  }
+function OfferCard({ offer, onMouseOver, activeCardId, onMouseEnter, className }: Props): JSX.Element {
   const navigate = useNavigate();
   const handleArticleClick = () => {
     if (activeCardId === undefined) {
@@ -32,7 +18,7 @@ function OfferCard({ offer, offerStatus, onMouseOver, activeCardId, onMouseEnter
     navigate(AppRoute.Room);
   };
   return (
-    <article className={`${renderCard}card place-card`} onClick={handleArticleClick} onMouseEnter={() => {
+    <article className={`${className}card place-card`} onClick={handleArticleClick} onMouseEnter={() => {
       onMouseOver(offer.id);
       onMouseEnter(offer.name);
     }}
@@ -41,11 +27,11 @@ function OfferCard({ offer, offerStatus, onMouseOver, activeCardId, onMouseEnter
         <div className="place-card__mark">
           <span>Premium</span>
         </div>)}
-      <div className={`${renderCard}image-wrapper place-card__image-wrapper`}>
+      <div className={`${className}image-wrapper place-card__image-wrapper`}>
         <link href="#" />
         <img className="place-card__image" src={offer.image[0]} width='260' height='200' alt="PlaceImage" />
       </div>
-      <div className={`${renderCard}card-info place-card__info`}>
+      <div className={`${className}card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>

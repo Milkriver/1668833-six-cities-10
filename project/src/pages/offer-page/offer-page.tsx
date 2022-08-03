@@ -1,7 +1,6 @@
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
-import { CardStatus } from '../../const';
 import { Offer } from '../../types/offer';
 
 type Props = {
@@ -115,7 +114,7 @@ function OfferPage({ offer, offers, offerHoverHandler }: Props): JSX.Element {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} offerStatus={CardStatus.NearPlace} offerHoverHandler={offerHoverHandler}/>
+              <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='near-places__'/>
             </div>
           </section>
         </div>

@@ -4,11 +4,11 @@ import OfferCard from '../offer-card/offer-card';
 
 type Props = {
   offers: Offer[];
-  offerStatus: string;
   offerHoverHandler: (offerName: string) => void;
+  className: string;
 };
 
-function OfferList({ offers, offerStatus, offerHoverHandler }: Props): JSX.Element {
+function OfferList({ offers, offerHoverHandler, className }: Props): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<number | undefined>();
   const handleActiveCard = (id: number | undefined) => {
     setActiveCardId(id);
@@ -18,11 +18,11 @@ function OfferList({ offers, offerStatus, offerHoverHandler }: Props): JSX.Eleme
       {offers.map((offer) => (
         <OfferCard
           offer={offer}
-          offerStatus={offerStatus}
           key={offer.id}
           activeCardId={activeCardId}
           onMouseOver={handleActiveCard}
           onMouseEnter={offerHoverHandler}
+          className={className}
         />
       ))}
     </>

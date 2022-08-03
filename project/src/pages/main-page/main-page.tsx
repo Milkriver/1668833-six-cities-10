@@ -3,7 +3,6 @@ import LocationItem from '../../components/location-item/location-item';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
-import { CardStatus } from '../../const';
 import { CITY } from '../../mock/offers';
 import { Offer } from '../../types/offer';
 
@@ -40,7 +39,7 @@ function MainPage({ offers, offerHoverHandler, selectedOffer }: Props): JSX.Elem
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} offerStatus={CardStatus.MainList} offerHoverHandler={offerHoverHandler} />
+                <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='cities__'/>
               </div>
             </section>
             <div className="cities__right-section">
