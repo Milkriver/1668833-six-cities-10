@@ -9,15 +9,13 @@ import { Offer } from '../../types/offer';
 
 const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
 
-type MainPageProps = {
+type Props = {
   offers: Offer[];
   offerHoverHandler: (offerName: string) => void;
   selectedOffer: Offer | undefined;
 };
 
-function MainPage(props: MainPageProps): JSX.Element {
-  const { offers, offerHoverHandler, selectedOffer } = props;
-
+function MainPage({ offers, offerHoverHandler, selectedOffer }: Props): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />

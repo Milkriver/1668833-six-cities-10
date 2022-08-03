@@ -2,14 +2,13 @@ import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
-type OfferListProps = {
+type Props = {
   offers: Offer[];
   offerStatus: string;
   offerHoverHandler: (offerName: string) => void;
 };
 
-function OfferList(props: OfferListProps): JSX.Element {
-  const { offers, offerStatus, offerHoverHandler } = props;
+function OfferList({ offers, offerStatus, offerHoverHandler }: Props): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<number | undefined>();
   const handleActiveCard = (id: number | undefined) => {
     setActiveCardId(id);

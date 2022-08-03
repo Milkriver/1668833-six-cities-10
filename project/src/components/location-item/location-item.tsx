@@ -1,8 +1,8 @@
-type LocationProps = {
+type Props = {
   location: string;
 }
 
-function LocationItem({ location }: LocationProps): JSX.Element {
+function LocationItem({ location }: Props): JSX.Element {
   return (
     <li className="locations__item">
       <a className="locations__item-link tabs__item" href="#">

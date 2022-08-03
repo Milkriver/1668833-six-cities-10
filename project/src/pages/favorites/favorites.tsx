@@ -4,13 +4,12 @@ import OfferList from '../../components/offer-list/offer-list';
 import { CardStatus } from '../../const';
 import { Offer } from '../../types/offer';
 
-type FavoritesProps = {
+type Props = {
   offers: Offer[];
   offerHoverHandler: (offerName: string) => void;
 };
 
-function Favorites(props: FavoritesProps): JSX.Element {
-  const { offers, offerHoverHandler } = props;
+function Favorites({ offers, offerHoverHandler }: Props): JSX.Element {
   return (
     <div className="page">
       <Header />

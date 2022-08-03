@@ -5,7 +5,7 @@ import { City, Offer } from '../../types/offer';
 import useMap from '../../hooks/use-map';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 
-type MapProps = {
+type Props = {
   city: City;
   offers: Offer[];
   selectedOffer: Offer | undefined;
@@ -23,8 +23,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map(props: MapProps): JSX.Element {
-  const { city, offers, selectedOffer } = props;
+function Map({ city, offers, selectedOffer }: Props): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 

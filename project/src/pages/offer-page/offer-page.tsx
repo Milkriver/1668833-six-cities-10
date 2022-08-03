@@ -4,14 +4,13 @@ import OfferList from '../../components/offer-list/offer-list';
 import { CardStatus } from '../../const';
 import { Offer } from '../../types/offer';
 
-type OfferPageProps = {
+type Props = {
   offer: Offer;
   offers: Offer[];
   offerHoverHandler: (offerName: string) => void;
 };
 
-function OfferPage(props: OfferPageProps): JSX.Element {
-  const { offer, offers, offerHoverHandler } = props;
+function OfferPage({ offer, offers, offerHoverHandler }: Props): JSX.Element {
   const { bedrooms, bookmark, description, guests, host, image, name, options, premium, price, rating, reviews, type } = offer;
   return (
     <div className="page">

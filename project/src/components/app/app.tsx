@@ -9,12 +9,12 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import { Offer } from '../../types/offer';
 import PrivateRoute from '../private-route/private-route';
 
-type AppProps = {
+type Props = {
   offers: Offer[];
 }
 
 
-function App({ offers }: AppProps): JSX.Element {
+function App({ offers }: Props): JSX.Element {
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
     undefined
   );

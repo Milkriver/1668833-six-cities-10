@@ -2,15 +2,14 @@ import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
 import { useNavigate } from 'react-router-dom';
 
-type OfferCardProps = {
+type Props = {
   offer: Offer;
   offerStatus: string;
   onMouseOver: (id: number | undefined) => void;
   activeCardId: number | undefined,
   onMouseEnter: (offerName: string) => void;
 }
-function OfferCard(props: OfferCardProps): JSX.Element {
-  const { offer, offerStatus, onMouseOver, activeCardId, onMouseEnter } = props;
+function OfferCard({ offer, offerStatus, onMouseOver, activeCardId, onMouseEnter }: Props): JSX.Element {
   let renderCard;
   switch (offerStatus) {
     case 'MAIN':
