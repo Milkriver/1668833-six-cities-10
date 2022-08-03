@@ -33,7 +33,7 @@ function App({ offers }: Props): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<OfferPage offers={offers} offer={offers[0]} offerHoverHandler={offerHoverHandler} />}
+          element={<OfferPage offers={offers} offer={offers[0]} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer}/>}
         />
         <Route
           path={AppRoute.Favorites}

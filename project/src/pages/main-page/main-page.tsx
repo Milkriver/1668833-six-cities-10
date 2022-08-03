@@ -43,7 +43,7 @@ function MainPage({ offers, offerHoverHandler, selectedOffer }: Props): JSX.Elem
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={CITY} offers={offers} selectedOffer={selectedOffer} />
+              <Map city={CITY} offers={offers} selectedOffer={selectedOffer} className='cities__'/>
             </div>
           </div>
         </div>
