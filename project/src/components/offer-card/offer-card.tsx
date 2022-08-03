@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 type Props = {
   offer: Offer;
-  onMouseOver: (id: number | undefined) => void;
   activeCardId: number | undefined,
-  onMouseEnter: (offerName: string) => void;
+  onMouseEnter: (id: number | undefined) => void;
+  onMouseLeave: () => void;
   className: string;
 }
-function OfferCard({ offer, onMouseOver, activeCardId, onMouseEnter, className }: Props): JSX.Element {
+function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className }: Props): JSX.Element {
   const navigate = useNavigate();
   const handleArticleClick = () => {
     if (activeCardId === undefined) {
@@ -17,12 +17,16 @@ function OfferCard({ offer, onMouseOver, activeCardId, onMouseEnter, className }
     }
     navigate(AppRoute.Room);
   };
+  const handleMouseEnter = () => {
+    onMouseEnter(offer.id);
+  };
+
+  const handleMouseLeave = () => {
+    onMouseLeave();
+  };
+
   return (
-    <article className={`${className}card place-card`} onClick={handleArticleClick} onMouseEnter={() => {
-      onMouseOver(offer.id);
-      onMouseEnter(offer.name);
-    }}
-    >
+    <article className={`${className}card place-card`} onClick={handleArticleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {offer.premium && (
         <div className="place-card__mark">
           <span>Premium</span>

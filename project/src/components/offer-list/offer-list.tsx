@@ -4,14 +4,18 @@ import OfferCard from '../offer-card/offer-card';
 
 type Props = {
   offers: Offer[];
-  offerHoverHandler: (offerName: string) => void;
+  offerHoverHandler: (id: number | undefined) => void;
   className: string;
 };
 
 function OfferList({ offers, offerHoverHandler, className }: Props): JSX.Element {
   const [activeCardId, setActiveCardId] = useState<number | undefined>();
-  const handleActiveCard = (id: number | undefined) => {
+  const handleOfferCardMouseEnter = (id: number | undefined) => {
     setActiveCardId(id);
+    offerHoverHandler(id);
+  };
+  const handleOfferCardMouseLeave = () => {
+    setActiveCardId(undefined);
   };
   return (
     <>
@@ -20,8 +24,8 @@ function OfferList({ offers, offerHoverHandler, className }: Props): JSX.Element
           offer={offer}
           key={offer.id}
           activeCardId={activeCardId}
-          onMouseOver={handleActiveCard}
-          onMouseEnter={offerHoverHandler}
+          onMouseEnter={handleOfferCardMouseEnter}
+          onMouseLeave={handleOfferCardMouseLeave}
           className={className}
         />
       ))}

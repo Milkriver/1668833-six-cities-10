@@ -10,7 +10,7 @@ const locations = ['Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
 
 type Props = {
   offers: Offer[];
-  offerHoverHandler: (offerName: string) => void;
+  offerHoverHandler: (id: number | undefined) => void;
   selectedOffer: Offer | undefined;
 };
 

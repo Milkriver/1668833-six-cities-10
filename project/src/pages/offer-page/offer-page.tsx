@@ -6,7 +6,7 @@ import { Offer } from '../../types/offer';
 type Props = {
   offer: Offer;
   offers: Offer[];
-  offerHoverHandler: (offerName: string) => void;
+  offerHoverHandler: (id: number | undefined) => void;
 };
 
 function OfferPage({ offer, offers, offerHoverHandler }: Props): JSX.Element {

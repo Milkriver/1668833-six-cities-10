@@ -19,8 +19,8 @@ function App({ offers }: Props): JSX.Element {
     undefined
   );
 
-  const offerHoverHandler = (offerName: string) => {
-    const currentOffer = offers.find((offer) => offer.name === offerName);
+  const offerHoverHandler = (offerId: number | undefined) => {
+    const currentOffer = offers.find((offer) => offer.id === offerId);
 
     setSelectedOffer(currentOffer);
   };
@@ -29,11 +29,11 @@ function App({ offers }: Props): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer}/>}
+          element={<MainPage offers={offers} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
         />
         <Route
           path={AppRoute.Room}
-          element={<OfferPage offers={offers} offer={offers[0]} offerHoverHandler={offerHoverHandler}/>}
+          element={<OfferPage offers={offers} offer={offers[0]} offerHoverHandler={offerHoverHandler} />}
         />
         <Route
           path={AppRoute.Favorites}
@@ -41,7 +41,7 @@ function App({ offers }: Props): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <Favorites offers={offers} offerHoverHandler={offerHoverHandler}/>
+              <Favorites offers={offers} offerHoverHandler={offerHoverHandler} />
             </PrivateRoute>
           }
         />
