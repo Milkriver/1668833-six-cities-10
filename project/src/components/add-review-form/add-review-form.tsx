@@ -1,21 +1,22 @@
 import { useState } from 'react';
 
+const ratingStars = [
+  { title: 'perfect', id: 5, },
+  { title: 'good', id: 4, },
+  { title: 'not bad', id: 3, },
+  { title: 'badly', id: 2, },
+  { title: 'terribly', id: 1, },
+];
+
 function AddReviewForm(): JSX.Element {
-  const ratingStars = [
-    { title: 'perfect', id: 5, },
-    { title: 'good', id: 4, },
-    { title: 'not bad', id: 3, },
-    { title: 'badly', id: 2, },
-    { title: 'terribly', id: 1, },
-  ];
   const [, setReview] = useState<string | undefined>();
   const [, setRating] = useState<string | undefined>();
   const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setReview(event.currentTarget.value);
   };
-  function handleRatingChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRating(event.currentTarget.value);
-  }
+  };
 
   return (
     <form className="reviews__form form" action="#" method="post">

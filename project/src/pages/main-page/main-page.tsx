@@ -39,13 +39,11 @@ function MainPage({ offers, offerHoverHandler, selectedOffer }: Props): JSX.Elem
               <b className="places__found">312 places to stay in Amsterdam</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='cities__'/>
+                <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='cities__' />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map city={CITY} offers={offers} selectedOffer={selectedOffer}/>
-              </section>
+              <Map city={CITY} offers={offers} selectedOffer={selectedOffer} />
             </div>
           </div>
         </div>
