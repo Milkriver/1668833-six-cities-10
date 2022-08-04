@@ -2,29 +2,14 @@ import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
 import { useNavigate } from 'react-router-dom';
 
-type OfferCardProps = {
+type Props = {
   offer: Offer;
-  offerStatus: string;
-  onMouseOver: (id: number | undefined) => void;
   activeCardId: number | undefined,
-  onMouseEnter: (offerName: string) => void;
+  onMouseEnter: (id: number | undefined) => void;
+  onMouseLeave: () => void;
+  className: string;
 }
-function OfferCard(props: OfferCardProps): JSX.Element {
-  const { offer, offerStatus, onMouseOver, activeCardId, onMouseEnter } = props;
-  let renderCard;
-  switch (offerStatus) {
-    case 'MAIN':
-      renderCard = 'cities__';
-      break;
-    case 'FAVORITES':
-      renderCard = 'favorites__';
-      break;
-    case 'NEAR':
-      renderCard = 'near-places__';
-      break;
-    default:
-      throw new Error('Тип не определен');
-  }
+function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className }: Props): JSX.Element {
   const navigate = useNavigate();
   const handleArticleClick = () => {
     if (activeCardId === undefined) {
@@ -32,21 +17,25 @@ function OfferCard(props: OfferCardProps): JSX.Element {
     }
     navigate(AppRoute.Room);
   };
+  const handleMouseEnter = () => {
+    onMouseEnter(offer.id);
+  };
+
+  const handleMouseLeave = () => {
+    onMouseLeave();
+  };
+
   return (
-    <article className={`${renderCard}card place-card`} onClick={handleArticleClick} onMouseEnter={() => {
-      onMouseOver(offer.id);
-      onMouseEnter(offer.name);
-    }}
-    >
+    <article className={`${className}card place-card`} onClick={handleArticleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {offer.premium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>)}
-      <div className={`${renderCard}image-wrapper place-card__image-wrapper`}>
+      <div className={`${className}image-wrapper place-card__image-wrapper`}>
         <link href="#" />
         <img className="place-card__image" src={offer.image[0]} width='260' height='200' alt="PlaceImage" />
       </div>
-      <div className={`${renderCard}card-info place-card__info`}>
+      <div className={`${className}card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -54,14 +43,14 @@ function OfferCard(props: OfferCardProps): JSX.Element {
           </div>
           <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
+              <use xlinkHref="#icon-bookmark" />
             </svg>
             <span className="visually-hidden">{(offer.bookmark) ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80 %' }} ></span>
+            <span style={{ width: '80 %' }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
