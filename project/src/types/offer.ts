@@ -1,4 +1,12 @@
 export type Offer = {
+  city: {
+    name: string,
+    location: {
+      latitude: number,
+      longitude: number,
+      zoom: number
+    }
+  },
   id: number,
   name: string,
   type: string,
