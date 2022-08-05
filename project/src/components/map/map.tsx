@@ -44,8 +44,9 @@ function Map({ city, offers, selectedOffer, className }: Props): JSX.Element {
           )
           .addTo(map);
       });
+      map.flyTo({ lat: city.lat, lng: city.lng }, city.zoom);
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, offers, selectedOffer, city]);
 
   return <section className={`${className}map map`} ref={mapRef}></section>;
 }

@@ -29,7 +29,7 @@ function App({ offers }: Props): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
+          element={<MainPage offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
         />
         <Route
           path={AppRoute.Room}

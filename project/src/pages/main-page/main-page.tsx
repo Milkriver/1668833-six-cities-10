@@ -3,16 +3,19 @@ import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
+import { useAppSelector } from '../../hooks';
 import { CITY } from '../../mock/offers';
 import { Offer } from '../../types/offer';
 
 type Props = {
-  offers: Offer[];
   offerHoverHandler: (id: number | undefined) => void;
   selectedOffer: Offer | undefined;
 };
 
-function MainPage({ offers, offerHoverHandler, selectedOffer }: Props): JSX.Element {
+function MainPage({ offerHoverHandler, selectedOffer }: Props): JSX.Element {
+  const { offers } = useAppSelector((state) => state);
+  const offersQuantity = offers.length;
+  const city = offers[0].city.name;
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -20,14 +23,14 @@ function MainPage({ offers, offerHoverHandler, selectedOffer }: Props): JSX.Elem
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList activeCity = 'Amsterdam'/>
+            <LocationList activeCity='Amsterdam' />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offersQuantity} places to stay in {city}</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
                 <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='cities__' />
