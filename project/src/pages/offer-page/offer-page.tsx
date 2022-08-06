@@ -3,17 +3,18 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import ReviewList from '../../components/review-list/review-list';
+import { useAppSelector } from '../../hooks';
 import { CITY } from '../../mock/offers';
 import { Offer } from '../../types/offer';
 
 type Props = {
   offer: Offer;
-  offers: Offer[];
   offerHoverHandler: (id: number | undefined) => void;
   selectedOffer: Offer | undefined;
 };
 
-function OfferPage({ offer, offers, offerHoverHandler, selectedOffer }: Props): JSX.Element {
+function OfferPage({ offer, offerHoverHandler, selectedOffer }: Props): JSX.Element {
+  const { offers } = useAppSelector((state) => state);
   return (
     <div className="page">
       <Header />

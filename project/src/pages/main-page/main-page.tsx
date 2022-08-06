@@ -4,8 +4,8 @@ import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import SortType from '../../components/sort-type/sort-type';
 import { useAppSelector } from '../../hooks';
-import { CITY } from '../../mock/offers';
 import { Offer } from '../../types/offer';
+import { sortCityOffers } from '../../utils';
 
 type Props = {
   offerHoverHandler: (id: number | undefined) => void;
@@ -13,9 +13,9 @@ type Props = {
 };
 
 function MainPage({ offerHoverHandler, selectedOffer }: Props): JSX.Element {
-  const { offers } = useAppSelector((state) => state);
-  const offersQuantity = offers.length;
-  const city = offers[0].city.name;
+  const { offers, city } = useAppSelector((state) => state);
+  const cityOffers = sortCityOffers(offers, city.name);
+  const offersQuantity = cityOffers.length;
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -23,21 +23,21 @@ function MainPage({ offerHoverHandler, selectedOffer }: Props): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList activeCity='Amsterdam' />
+            <LocationList activeCity={city} />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersQuantity} places to stay in {city}</b>
+              <b className="places__found">{offersQuantity} places to stay in {city.name}</b>
               <SortType />
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='cities__' />
+                <OfferList offers={cityOffers} offerHoverHandler={offerHoverHandler} className='cities__' />
               </div>
             </section>
             <div className="cities__right-section">
-              <Map city={CITY} offers={offers} selectedOffer={selectedOffer} className='cities__' />
+              <Map city={city} offers={cityOffers} selectedOffer={selectedOffer} className='cities__' />
             </div>
           </div>
         </div>

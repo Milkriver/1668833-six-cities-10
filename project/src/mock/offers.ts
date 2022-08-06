@@ -1,10 +1,12 @@
 import { City, Offer } from '../types/offer';
 
 export const CITY: City = {
-  title: 'Амстердам',
-  lat: 52.370216,
-  lng: 4.895168,
-  zoom: 10,
+  name: 'Paris',
+  location: {
+    latitude: 48.8534,
+    longitude: 2.3488,
+    zoom: 13
+  },
 };
 
 export const offers: Offer[] = [
@@ -164,8 +166,8 @@ export const offers: Offer[] = [
     city: {
       name: 'Paris',
       location: {
-        latitude: 52.3809553943508,
-        longitude: 4.939309666406198,
+        latitude: 48.8534,
+        longitude: 2.3488,
         zoom: 13
       }
     },
@@ -194,8 +196,8 @@ export const offers: Offer[] = [
     rating: 3.3,
     bedrooms: 2,
     guests: 3,
-    lat: 52.3809553943508,
-    lng: 4.939309666406198,
+    lat: 48.8634,
+    lng: 2.3888,
     options: ['Breakfast', 'Laptop friendly workspace'],
     host: {
       image: 'img/avatar-angelina.jpg',
