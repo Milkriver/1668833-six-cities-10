@@ -29,11 +29,11 @@ function App({ offers }: Props): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offers={offers} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
+          element={<MainPage offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
         />
         <Route
           path={AppRoute.Room}
-          element={<OfferPage offers={offers} offer={offers[0]} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer}/>}
+          element={<OfferPage offer={offers[0]} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer}/>}
         />
         <Route
           path={AppRoute.Favorites}
@@ -41,7 +41,7 @@ function App({ offers }: Props): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <Favorites offers={offers} offerHoverHandler={offerHoverHandler} />
+              <Favorites offerHoverHandler={offerHoverHandler} />
             </PrivateRoute>
           }
         />

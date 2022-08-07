@@ -1,14 +1,15 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 
 type Props = {
-  offers: Offer[];
   offerHoverHandler: (id: number | undefined) => void;
 };
 
-function Favorites({ offers, offerHoverHandler }: Props): JSX.Element {
+function Favorites({ offerHoverHandler }: Props): JSX.Element {
+  const { offers } = useAppSelector((state) => state);
+  const favoriteOffers = offers.filter((offer) => offer.bookmark);
   return (
     <div className="page">
       <Header />
@@ -40,7 +41,7 @@ function Favorites({ offers, offerHoverHandler }: Props): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='favorites__'/>
+                  <OfferList offers={favoriteOffers} offerHoverHandler={offerHoverHandler} className='favorites__'/>
                 </div>
               </li>
             </ul>
