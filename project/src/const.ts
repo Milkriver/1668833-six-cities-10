@@ -66,3 +66,10 @@ export const LOCATIONS = [
     }
   },
 ];
+
+export const sortOptionList = {
+  popular: 'Popular',
+  risingPrice: 'Price: low to high',
+  decliningPrice: 'Price: high to low',
+  topRating: 'Top rated first',
+};
