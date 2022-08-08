@@ -1,3 +1,4 @@
+import { City } from './types/offer';
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -16,8 +17,8 @@ export const URL_MARKER_DEFAULT = 'img/pin.svg';
 
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
-export const LOCATIONS = [
-  {
+export const locations: Record<string, City> = {
+  Amsterdam: {
     name: 'Amsterdam',
     location: {
       latitude: 52.37454,
@@ -25,7 +26,7 @@ export const LOCATIONS = [
       zoom: 13
     }
   },
-  {
+  Paris: {
     name: 'Paris',
     location: {
       latitude: 48.8534,
@@ -33,7 +34,7 @@ export const LOCATIONS = [
       zoom: 13
     }
   },
-  {
+  Cologne: {
     name: 'Cologne',
     location: {
       latitude: 45.5774872,
@@ -41,7 +42,7 @@ export const LOCATIONS = [
       zoom: 13
     }
   },
-  {
+  Brussels: {
     name: 'Brussels',
     location: {
       latitude: 50.8504,
@@ -49,7 +50,7 @@ export const LOCATIONS = [
       zoom: 13
     }
   },
-  {
+  Hamburg: {
     name: 'Hamburg',
     location: {
       latitude: 53.5753,
@@ -57,7 +58,7 @@ export const LOCATIONS = [
       zoom: 13
     }
   },
-  {
+  Dusseldorf: {
     name: 'Dusseldorf',
     location: {
       latitude: 51.2217,
@@ -65,7 +66,7 @@ export const LOCATIONS = [
       zoom: 13
     }
   },
-];
+};
 
 export const sortOptionList = {
   popular: 'Popular',

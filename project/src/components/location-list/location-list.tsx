@@ -1,7 +1,6 @@
-import { LOCATIONS } from '../../const';
-import { changeCity } from '../../utils';
+import { locations } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { changeCityAction } from '../../store/action';
+import { getCityAction } from '../../store/action';
 import LocationItem from '../location-item/location-item';
 import { City } from '../../types/offer';
 
@@ -12,18 +11,16 @@ type Props = {
 
 function LocationList({ activeCity }: Props): JSX.Element {
   const dispatch = useAppDispatch();
-  const handleChangedCity = (evt: React.MouseEvent<HTMLAnchorElement>) => {
-    evt.preventDefault();
-    const changedCity: string = evt.currentTarget.innerText;
-    const city = changeCity(LOCATIONS, changedCity);
-    if (city) {
-      dispatch(changeCityAction({ city: city }));
+  const handleChangedCity = (changedCity: string) => {
+    const cityKey = Object.keys(locations).find((location) => location === changedCity);
+    if (cityKey) {
+      dispatch(getCityAction({ city: locations[cityKey] }));
     }
   };
 
   return (
     <ul className="locations__list tabs__list">
-      {LOCATIONS.map((location) => <LocationItem key={location.name} location={location.name} activeCity={activeCity.name} onClick={handleChangedCity} />)}
+      {Object.values(locations).map((location) => <LocationItem key={location.name} location={location.name} activeCity={activeCity.name} onClick={handleChangedCity} />)}
     </ul>
   );
 }

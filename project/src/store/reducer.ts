@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { CITY, offers } from '../mock/offers';
-import { changeCityAction, changeSortOptionAction } from './action';
+import { getCityAction, changeSortOptionAction } from './action';
 
 const initialState = {
   city: CITY,
@@ -10,7 +10,7 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(changeCityAction, (state, action) => {
+    .addCase(getCityAction, (state, action) => {
       state.city = action.payload.city;
     })
     .addCase(changeSortOptionAction, (state, action) => {
