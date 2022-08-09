@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
-import SortType from '../../components/sort-type/sort-type';
+import SortOptionList from '../../components/sort-option-list/sort-option-list';
 import { useAppSelector } from '../../hooks';
 import { Offer } from '../../types/offer';
 import { sortCityOffers } from '../../utils';
@@ -31,7 +31,7 @@ function MainPage({ offerHoverHandler, selectedOffer }: Props): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offersQuantity} places to stay in {city.name}</b>
-              <SortType />
+              <SortOptionList offers={cityOffers}/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferList offers={cityOffers} offerHoverHandler={offerHoverHandler} className='cities__' />
               </div>
