@@ -1,20 +1,41 @@
+import { locations } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { CITY, offers } from '../mock/offers';
-import { getCityAction, changeSortOptionAction } from './action';
+import { AuthorizationStatus } from '../const';
+import { City, Offer } from '../types/offer';
+import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus } from './action';
 
-const initialState = {
-  city: CITY,
-  offers: offers,
+type InitalState = {
+  city: City,
+  offers: Offer[],
+  selectedSortOption: string,
+  authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
+}
+
+const initialState: InitalState = {
+  city: locations.Paris,
+  offers: [],
   selectedSortOption: 'Popular',
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(getCityAction, (state, action) => {
+    .addCase(getCity, (state, action) => {
       state.city = action.payload.city;
     })
-    .addCase(changeSortOptionAction, (state, action) => {
+    .addCase(changeSortOption, (state, action) => {
       state.selectedSortOption = action.payload.sortOption;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
+    })
+    .addCase(setDataLoadedStatus, (state, action) => {
+      state.isDataLoaded = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 

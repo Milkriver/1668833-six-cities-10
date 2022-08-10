@@ -1,13 +1,4 @@
-import { City, Offer } from '../types/offer';
-
-export const CITY: City = {
-  name: 'Paris',
-  location: {
-    latitude: 48.8534,
-    longitude: 2.3488,
-    zoom: 13
-  },
-};
+import { Offer } from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -20,22 +11,27 @@ export const offers: Offer[] = [
       }
     },
     id: 1,
-    image: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
-    premium: true,
-    bookmark: false,
-    name: 'Beautiful & luxurious apartment at great location',
+    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/apartment-01.jpg'],
+    isPremium: true,
+    isFavorite: false,
+    title: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
     price: 120,
     rating: 4.8,
     bedrooms: 3,
-    guests: 4,
-    lat: 52.3909553943508,
-    lng: 4.85309666406198,
-    options: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
+    maxAdults: 4,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 16
+    },
+    previewImage: 'https://10.react.pages.academy/static/hotel/18.jpg',
+    goods: ['Wi-Fi', 'Washing machine', 'Towels', 'Heating', 'Coffee machine', 'Baby seat', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
-      image: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      isPro: 'Pro',
+      id: 1,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.The building is green and from 18th century. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     reviews: [
@@ -58,22 +54,27 @@ export const offers: Offer[] = [
       }
     },
     id: 2,
-    image: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg'],
-    premium: false,
-    bookmark: true,
-    name: 'Wood and stone place',
+    images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg'],
+    isPremium: false,
+    isFavorite: true,
+    title: 'Wood and stone place',
     type: 'Private room',
     price: 80,
     rating: 4,
     bedrooms: 3,
-    guests: 4,
-    lat: 52.369553943508,
-    lng: 4.85309666406198,
-    options: ['Wi-Fi', 'Heating', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
+    maxAdults: 4,
+    location: {
+      'latitude': 52.369553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 16
+    },
+    previewImage: 'https://10.react.pages.academy/static/hotel/18.jpg',
+    goods: ['Wi-Fi', 'Heating', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
-      image: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      isPro: 'Pro',
+      id: 1,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.The building is green and from 18th century. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     reviews: [
@@ -96,22 +97,27 @@ export const offers: Offer[] = [
       }
     },
     id: 3,
-    image: ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg'],
-    premium: false,
-    bookmark: false,
-    name: 'Canal View Prinsengracht',
+    images: ['img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-01.jpg'],
+    isPremium: false,
+    isFavorite: false,
+    title: 'Canal View Prinsengracht',
     type: 'Apartment',
     price: 132,
     rating: 4,
     bedrooms: 3,
-    guests: 4,
-    lat: 52.3909553943508,
-    lng: 4.929309666406198,
-    options: ['Wi-Fi', 'Heating', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
+    maxAdults: 4,
+    location: {
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
+      'zoom': 16
+    },
+    previewImage: 'https://10.react.pages.academy/static/hotel/18.jpg',
+    goods: ['Wi-Fi', 'Heating', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
-      image: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      isPro: 'Pro',
+      id: 1,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.The building is green and from 18th century. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     reviews: [
@@ -134,22 +140,27 @@ export const offers: Offer[] = [
       }
     },
     id: 4,
-    image: ['img/apartment-03.jpg', 'img/apartment-01.jpg'],
-    premium: false,
-    bookmark: false,
-    name: 'Nice, cozy, warm big bed apartment',
+    images: ['img/apartment-03.jpg', 'img/apartment-01.jpg'],
+    isPremium: false,
+    isFavorite: false,
+    title: 'Nice, cozy, warm big bed apartment',
     type: 'Apartment',
     price: 125,
     rating: 4,
     bedrooms: 2,
-    guests: 2,
-    lat: 52.3809553943508,
-    lng: 4.939309666406198,
-    options: ['Wi-Fi', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
+    maxAdults: 2,
+    location: {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 16
+    },
+    previewImage: 'https://10.react.pages.academy/static/hotel/18.jpg',
+    goods: ['Wi-Fi', 'Coffee machine', 'Kitchen', 'Dishwasher', 'Cabel TV', 'Fridge'],
     host: {
-      image: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Helen',
-      status: 'Pro',
+      isPro: 'Pro',
+      id: 1,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.The building is green and from 18th century. An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     reviews: [
@@ -172,7 +183,7 @@ export const offers: Offer[] = [
       }
     },
     id: 5,
-    image: [
+    images: [
       'https://10.react.pages.academy/static/hotel/3.jpg',
       'https://10.react.pages.academy/static/hotel/2.jpg',
       'https://10.react.pages.academy/static/hotel/15.jpg',
@@ -188,21 +199,26 @@ export const offers: Offer[] = [
       'https://10.react.pages.academy/static/hotel/11.jpg',
       'https://10.react.pages.academy/static/hotel/4.jpg'
     ],
-    premium: false,
-    bookmark: false,
-    name: 'Nice, cozy, warm big bed apartment',
+    isPremium: false,
+    isFavorite: false,
+    title: 'Nice, cozy, warm big bed apartment',
     type: 'house',
     price: 654,
     rating: 3.3,
     bedrooms: 2,
-    guests: 3,
-    lat: 48.8634,
-    lng: 2.3888,
-    options: ['Breakfast', 'Laptop friendly workspace'],
+    maxAdults: 3,
+    location: {
+      'latitude': 48.8634,
+      'longitude': 2.3888,
+      'zoom': 16
+    },
+    previewImage: 'https://10.react.pages.academy/static/hotel/18.jpg',
+    goods: ['Breakfast', 'Laptop friendly workspace'],
     host: {
-      image: 'img/avatar-angelina.jpg',
+      avatarUrl: 'img/avatar-angelina.jpg',
       name: 'Angelina',
-      status: 'Pro',
+      isPro: 'Pro',
+      id: 1,
     },
     description: 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
     reviews: [

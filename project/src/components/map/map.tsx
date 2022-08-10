@@ -32,13 +32,13 @@ function Map({ city, offers, selectedOffer, className }: Props): JSX.Element {
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer.lat,
-          lng: offer.lng
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
         });
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.name === selectedOffer.name
+            selectedOffer !== undefined && offer.title === selectedOffer.title
               ? currentCustomIcon
               : defaultCustomIcon
           )

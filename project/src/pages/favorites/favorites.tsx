@@ -9,7 +9,7 @@ type Props = {
 
 function Favorites({ offerHoverHandler }: Props): JSX.Element {
   const { offers } = useAppSelector((state) => state);
-  const favoriteOffers = offers.filter((offer) => offer.bookmark);
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   return (
     <div className="page">
       <Header />

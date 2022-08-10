@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { sortOptionList } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeSortOptionAction } from '../../store/action';
+import { changeSortOption } from '../../store/action';
 import { Offer } from '../../types/offer';
 import { sortOfferList } from '../../utils';
 
@@ -20,7 +20,7 @@ function SortOptionList({ offers }: Props): JSX.Element {
   };
 
   const onSortChangeHandler = (sortTab: string) => {
-    dispatch(changeSortOptionAction({ sortOption: sortTab }));
+    dispatch(changeSortOption({ sortOption: sortTab }));
     openSortMenuHandler();
   };
 

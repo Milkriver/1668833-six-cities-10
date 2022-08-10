@@ -1,4 +1,5 @@
 import { City } from './types/offer';
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -6,15 +7,27 @@ export enum AppRoute {
   Room = '/offer/:id',
 }
 
-
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
 
-export const URL_MARKER_DEFAULT = 'img/pin.svg';
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
 
+export enum APIRoute {
+  Hotels = '/hotels',
+  Hotel = '/hotels/:id',
+  HotelsNearby = '/hotels/:id/nearby',
+  Favorites = '/favorite',
+  Comments = '/comments/:id',
+  Comment = '/comments/:id',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const URL_MARKER_DEFAULT = 'img/pin.svg';
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 export const locations: Record<string, City> = {
