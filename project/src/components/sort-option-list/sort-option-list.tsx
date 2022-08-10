@@ -12,7 +12,7 @@ type Props = {
 
 function SortOptionList({ offers }: Props): JSX.Element {
   const [isSortMenuOpened, setIsSortMenuOpened] = useState(false);
-  const { selectedSortOption } = useAppSelector((state) => state);
+  const selectedSortOption = useAppSelector((state) => state.selectedSortOption);
   const dispatch = useAppDispatch();
   sortOfferList(selectedSortOption, offers);
   const openSortMenuHandler = () => {
@@ -34,7 +34,7 @@ function SortOptionList({ offers }: Props): JSX.Element {
         </svg>
       </span>
       {
-        isSortMenuOpened ?
+        isSortMenuOpened &&
           <ul className="places__options places__options--custom places__options--opened">
             {
               Object.values(sortOptionList).map((sortOption) => (
@@ -48,8 +48,6 @@ function SortOptionList({ offers }: Props): JSX.Element {
               ))
             }
           </ul>
-          :
-          null
       }
     </form>
   );
