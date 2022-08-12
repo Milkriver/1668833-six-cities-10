@@ -8,24 +8,28 @@ export type Offer = {
     }
   },
   id: number,
-  name: string,
+  title: string,
   type: string,
-  premium: boolean,
-  image: string[],
+  isPremium: boolean,
+  images: string[],
   price: number,
-  bookmark: boolean,
+  isFavorite: boolean,
   rating: number,
-  lat: number,
-  lng: number,
+  location: {
+    latitude: number,
+    longitude: number,
+    zoom: number}
   bedrooms: number,
-  guests: number,
-  options: string[],
+  maxAdults: number,
+  goods: string[],
   host: {
-    image: string,
+    id: number,
     name: string,
-    status: string,
+    isPro: string,
+    avatarUrl: string,
   },
   description: string,
+  previewImage: string,
   reviews: [
     {
       avatar: string,

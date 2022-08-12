@@ -3,8 +3,8 @@ import Header from '../../components/header/header';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import ReviewList from '../../components/review-list/review-list';
+import { locations } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { CITY } from '../../mock/offers';
 import { Offer } from '../../types/offer';
 
 type Props = {
@@ -23,20 +23,20 @@ function OfferPage({ offer, offerHoverHandler, selectedOffer }: Props): JSX.Elem
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {
-                offer.image.map((src) => (<div className="property__image-wrapper" key={offer.id}> <img className="property__image" src={src} alt="PhotoStudio" /> </div>))
+                offer.images.map((src) => (<div className="property__image-wrapper" key={offer.id}> <img className="property__image" src={src} alt="PhotoStudio" /> </div>))
               }
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {offer.premium && (<div className="place-card__mark"><span>Premium</span></div>)}
+              {offer.isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
               <div className="property__name-wrapper">
-                <h1 className="property__name">{offer.name}</h1>
+                <h1 className="property__name">{offer.title}</h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
-                  <span className="visually-hidden">{(offer.bookmark) ? 'In bookmarks' : 'To bookmarks'}</span>
+                  <span className="visually-hidden">{(offer.isFavorite) ? 'In bookmarks' : 'To bookmarks'}</span>
                 </button>
               </div>
               <div className="property__rating rating">
@@ -49,7 +49,7 @@ function OfferPage({ offer, offerHoverHandler, selectedOffer }: Props): JSX.Elem
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">{offer.type}</li>
                 <li className="property__feature property__feature--bedrooms">{offer.bedrooms} Bedrooms</li>
-                <li className="property__feature property__feature--adults">Max {offer.guests} adults</li>
+                <li className="property__feature property__feature--adults">Max {offer.maxAdults} adults</li>
               </ul>
               <div className="property__price">
                 <b className="property__price-value">&euro;{offer.price}</b>
@@ -59,7 +59,7 @@ function OfferPage({ offer, offerHoverHandler, selectedOffer }: Props): JSX.Elem
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
                   {
-                    offer.options.map((option) => (<li className="property__inside-item" key={option}>{option}</li>))
+                    offer.goods.map((option) => (<li className="property__inside-item" key={option}>{option}</li>))
                   }
                 </ul>
               </div>
@@ -67,13 +67,13 @@ function OfferPage({ offer, offerHoverHandler, selectedOffer }: Props): JSX.Elem
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer.host.image} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {offer.host.name}
                   </span>
                   <span className="property__user-status">
-                    {offer.host.status}
+                    {offer.host.isPro}
                   </span>
                 </div>
                 <div className="property__description">
@@ -87,7 +87,7 @@ function OfferPage({ offer, offerHoverHandler, selectedOffer }: Props): JSX.Elem
               </section>
             </div>
           </div>
-          <Map city={CITY} offers={offers} selectedOffer={selectedOffer} className='property__'/>
+          <Map city={locations.Paris} offers={offers} selectedOffer={selectedOffer} className='property__'/>
         </section>
         <div className="container">
           <section className="near-places places">

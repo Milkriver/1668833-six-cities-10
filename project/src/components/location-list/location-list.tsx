@@ -1,6 +1,6 @@
 import { locations } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { getCityAction } from '../../store/action';
+import { getCity } from '../../store/action';
 import LocationItem from '../location-item/location-item';
 import { City } from '../../types/offer';
 
@@ -14,7 +14,7 @@ function LocationList({ activeCity }: Props): JSX.Element {
   const handleChangedCity = (changedCity: string) => {
     const cityKey = Object.keys(locations).find((location) => location === changedCity);
     if (cityKey) {
-      dispatch(getCityAction({ city: locations[cityKey] }));
+      dispatch(getCity({ city: locations[cityKey] }));
     }
   };
 
