@@ -38,7 +38,7 @@ function Map({ city, offers, selectedOffer, className }: Props): JSX.Element {
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.title === selectedOffer.title
+            selectedOffer !== undefined && offer.id === selectedOffer.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
