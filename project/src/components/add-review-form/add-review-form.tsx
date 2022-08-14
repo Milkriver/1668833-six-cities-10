@@ -31,7 +31,6 @@ function AddReviewForm(): JSX.Element {
               id={`${star.id}-stars`}
               type="radio"
               onChange={handleRatingChange}
-              key={star.id}
             />
             <label
               htmlFor={`${star.id}-stars`}

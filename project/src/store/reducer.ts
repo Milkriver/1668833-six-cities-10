@@ -10,7 +10,7 @@ type InitalState = {
   selectedSortOption: string,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,
-  offer: Offer,
+  activeOffer: Offer | undefined,
 }
 
 const initialState: InitalState = {
@@ -19,27 +19,7 @@ const initialState: InitalState = {
   selectedSortOption: 'Popular',
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
-  offer: {
-    city: {
-      name: '',
-      location: { latitude: 0, longitude: 0, zoom: 0 }
-    },
-    previewImage: '',
-    images: [],
-    title: '',
-    isFavorite: false,
-    isPremium: false,
-    rating: 0,
-    type: '',
-    bedrooms: 0,
-    maxAdults: 0,
-    price: 0,
-    goods: [],
-    host: { id: 0, name: '', isPro: true, avatarUrl: '' },
-    description: '',
-    location: { latitude: 0, longitude: 0, zoom: 0, },
-    id: 1
-  }
+  activeOffer: undefined,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -54,7 +34,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.offers = action.payload;
     })
     .addCase(loadActiveOffer, (state, action) => {
-      state.offer = action.payload;
+      state.activeOffer = action.payload;
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
