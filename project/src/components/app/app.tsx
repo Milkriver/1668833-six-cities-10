@@ -13,12 +13,8 @@ import { Offer } from '../../types/offer';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 
-type Props = {
-  offers: Offer[];
-}
-
-function App({ offers }: Props): JSX.Element {
-  const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+function App(): JSX.Element {
+  const { offers, authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
     undefined
   );
