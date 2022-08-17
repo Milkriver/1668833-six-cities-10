@@ -11,9 +11,7 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 function OfferPage(): JSX.Element {
   const { offers, activeOffer } = useAppSelector((state) => state);
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
     setSelectedOffer(currentOffer);
