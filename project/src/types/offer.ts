@@ -43,9 +43,14 @@ export type City = {
 };
 
 export type Review = {
-  avatar: string,
-  name: string,
-  text: string,
-  date: string,
-  rating: number,
-}
+  comment: string
+  date: string
+  id: number
+  rating: number
+  user: {
+    avatarUrl: string
+    id: number
+    isPro: boolean
+    name: string
+  }
+};
