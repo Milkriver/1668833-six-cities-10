@@ -7,39 +7,31 @@ export type Offer = {
       zoom: number
     }
   },
-  id: number,
+  previewImage: string,
+  images: [],
   title: string,
-  type: string,
-  isPremium: boolean,
-  images: string[],
-  price: number,
   isFavorite: boolean,
+  isPremium: boolean,
   rating: number,
-  location: {
-    latitude: number,
-    longitude: number,
-    zoom: number}
+  type: string,
   bedrooms: number,
   maxAdults: number,
-  goods: string[],
+  price: number,
+  goods: [],
   host: {
     id: number,
     name: string,
-    isPro: string,
-    avatarUrl: string,
+    isPro: true,
+    avatarUrl: string
   },
   description: string,
-  previewImage: string,
-  reviews: [
-    {
-      avatar: string,
-      name: string,
-      text: string,
-      date: string,
-      rating: number,
-    }
-  ],
-};
+  location: {
+    latitude: number,
+    longitude: number,
+    zoom: number,
+  },
+  id: 1
+}
 
 export type City = {
   name: string,

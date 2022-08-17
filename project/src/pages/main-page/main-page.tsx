@@ -1,21 +1,10 @@
 import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
-import Map from '../../components/map/map';
-import OfferList from '../../components/offer-list/offer-list';
-import SortOptionList from '../../components/sort-option-list/sort-option-list';
+import OfferListContainer from '../../components/offer-list-container/offer-list-container';
 import { useAppSelector } from '../../hooks';
-import { Offer } from '../../types/offer';
-import { sortCityOffers } from '../../utils';
 
-type Props = {
-  offerHoverHandler: (id: number | undefined) => void;
-  selectedOffer: Offer | undefined;
-};
-
-function MainPage({ offerHoverHandler, selectedOffer }: Props): JSX.Element {
-  const { offers, city } = useAppSelector((state) => state);
-  const cityOffers = sortCityOffers(offers, city.name);
-  const offersQuantity = cityOffers.length;
+function MainPage(): JSX.Element {
+  const { city } = useAppSelector((state) => state);
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -27,19 +16,7 @@ function MainPage({ offerHoverHandler, selectedOffer }: Props): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersQuantity} places to stay in {city.name}</b>
-              <SortOptionList offers={cityOffers}/>
-              <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={cityOffers} offerHoverHandler={offerHoverHandler} className='cities__' />
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <Map city={city} offers={cityOffers} selectedOffer={selectedOffer} className='cities__' />
-            </div>
-          </div>
+          <OfferListContainer/>
         </div>
       </main>
     </div>

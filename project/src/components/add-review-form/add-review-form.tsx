@@ -60,7 +60,7 @@ function AddReviewForm(): JSX.Element {
           </span>
           and describe your stay with at least
           <b className="reviews__text-amount">
-            50 characters
+             50 characters
           </b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>

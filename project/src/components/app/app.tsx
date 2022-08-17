@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import { AppRoute, isCheckedAuth } from '../../const';
@@ -9,39 +8,27 @@ import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferPage from '../../pages/offer-page/offer-page';
-import { Offer } from '../../types/offer';
 import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 
-type Props = {
-  offers: Offer[];
-}
-
-function App({ offers }: Props): JSX.Element {
+function App(): JSX.Element {
   const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
   if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
     return (
       <LoadingScreen />
     );
   }
 
-  const offerHoverHandler = (offerId: number | undefined) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-    setSelectedOffer(currentOffer);
-  };
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainPage offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.Room}
-          element={<OfferPage offer={offers[0]} offerHoverHandler={offerHoverHandler} selectedOffer={selectedOffer} />}
+          element={<OfferPage />}
         />
         <Route
           path={AppRoute.Favorites}
@@ -49,7 +36,7 @@ function App({ offers }: Props): JSX.Element {
             <PrivateRoute
               authorizationStatus={authorizationStatus}
             >
-              <Favorites offerHoverHandler={offerHoverHandler} />
+              <Favorites />
             </PrivateRoute>
           }
         />

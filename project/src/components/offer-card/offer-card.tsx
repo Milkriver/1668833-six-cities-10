@@ -33,7 +33,7 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
         </div>)}
       <div className={`${className}image-wrapper place-card__image-wrapper`}>
         <link href="#" />
-        <img className="place-card__image" src={offer.images[0]} width='260' height='200' alt="PlaceImage" />
+        <img className="place-card__image" src={offer.previewImage} width='260' height='200' alt="PlaceImage" />
       </div>
       <div className={`${className}card-info place-card__info`}>
         <div className="place-card__price-wrapper">
