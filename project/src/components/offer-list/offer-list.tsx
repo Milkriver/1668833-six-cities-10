@@ -6,7 +6,7 @@ import OfferCard from '../offer-card/offer-card';
 
 type Props = {
   offers: Offer[];
-  offerHoverHandler: (id: number | undefined) => void;
+  offerHoverHandler?: (id: number | undefined) => void;
   className: string;
 };
 
@@ -15,7 +15,9 @@ function OfferList({ offers, offerHoverHandler, className }: Props): JSX.Element
   const dispatch = useAppDispatch();
   const handleOfferCardMouseEnter = (id: number | undefined) => {
     setActiveCardId(id);
-    offerHoverHandler(id);
+    if (offerHoverHandler !== undefined) {
+      offerHoverHandler(id);
+    }
     if (id !== undefined) {
       dispatch(fetchActiveOfferAction(id));
     }

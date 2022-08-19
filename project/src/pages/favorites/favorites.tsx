@@ -1,19 +1,10 @@
-import { useState } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
 import { useAppSelector } from '../../hooks';
-import { Offer } from '../../types/offer';
 
 function Favorites(): JSX.Element {
   const { offers } = useAppSelector((state) => state);
-  const [, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
-  const offerHoverHandler = (offerId: number | undefined) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-    setSelectedOffer(currentOffer);
-  };
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   return (
     <div className="page">
@@ -35,7 +26,7 @@ function Favorites(): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList offers={favoriteOffers} offerHoverHandler={offerHoverHandler} className='favorites__' />
+                  <OfferList offers={favoriteOffers} className='favorites__' />
                 </div>
               </li>
             </ul>
