@@ -77,10 +77,8 @@ export const fetchActiveOfferAction = createAsyncThunk<void, number, {
   'data/loadActiveOffer',
   async (offerId, {dispatch, extra: api}) => {
     try {
-      dispatch(setDataLoadedStatus(true));
       const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${offerId}`);
       dispatch(loadActiveOffer(data));
-      dispatch(setDataLoadedStatus(false));
     } catch (error) {
       dispatch(redirectToRoute(AppRoute.PageError));
     }

@@ -1,6 +1,6 @@
 import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 
 type Props = {
   offer: Offer;
@@ -10,13 +10,6 @@ type Props = {
   className: string;
 }
 function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className }: Props): JSX.Element {
-  const navigate = useNavigate();
-  const handleArticleClick = () => {
-    if (activeCardId === undefined) {
-      return;
-    }
-    navigate(AppRoute.Room);
-  };
   const handleMouseEnter = () => {
     onMouseEnter(offer.id);
   };
@@ -24,16 +17,16 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
   const handleMouseLeave = () => {
     onMouseLeave();
   };
-
   return (
-    <article className={`${className}card place-card`} onClick={handleArticleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <article className={`${className}card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {offer.isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>)}
       <div className={`${className}image-wrapper place-card__image-wrapper`}>
-        <link href="#" />
-        <img className="place-card__image" src={offer.previewImage} width='260' height='200' alt="PlaceImage" />
+        <Link to={generatePath(AppRoute.Room, { id: String(offer.id) })}>
+          <img className="place-card__image" src={offer.previewImage} width='260' height='200' alt={`${offer.title}`} />
+        </Link>
       </div>
       <div className={`${className}card-info place-card__info`}>
         <div className="place-card__price-wrapper">
@@ -55,7 +48,9 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
           </div>
         </div>
         <h2 className="place-card__name">
-          <link href="#" />{offer.title}
+          <Link to={generatePath(AppRoute.Room, { id: String(offer.id) })}>
+            {offer.title}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
