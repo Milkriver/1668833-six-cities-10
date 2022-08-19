@@ -4,7 +4,7 @@ import OfferListContainer from '../../components/offer-list-container/offer-list
 import { useAppSelector } from '../../hooks';
 
 function MainPage(): JSX.Element {
-  const { city } = useAppSelector((state) => state);
+  const city = useAppSelector((state) => state.city);
   return (
     <div className="page page--gray page--main">
       <Header />
