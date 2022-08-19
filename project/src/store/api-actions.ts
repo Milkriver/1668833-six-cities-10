@@ -46,9 +46,9 @@ export const fetchNearByOffersAction = createAsyncThunk<void, undefined, {
 }
 >(
   'offers/loadNearByOffers',
-  async (_arg, {dispatch, extra: api}) => {
+  async (offerId, {dispatch, extra: api}) => {
     dispatch(setDataLoadedStatus(true));
-    const {data} = await api.get<Offer[]>(APIRoute.HotelsNearby);
+    const {data} = await api.get<Offer[]>(`${APIRoute.Hotels}/${offerId}/nearby`);
     dispatch(loadNearByOffers(data));
     dispatch(setDataLoadedStatus(false));
   },
@@ -61,9 +61,9 @@ export const fetchCommentsAction = createAsyncThunk<void, undefined, {
 }
 >(
   'offers/loadComments',
-  async (_arg, {dispatch, extra: api}) => {
+  async (offerId, {dispatch, extra: api}) => {
     dispatch(setDataLoadedStatus(true));
-    const {data} = await api.get<Review[]>(APIRoute.Comments);
+    const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
     dispatch(loadComments(data));
     dispatch(setDataLoadedStatus(false));
   },
@@ -75,10 +75,10 @@ export const fetchActiveOfferAction = createAsyncThunk<void, number, {
   extra: AxiosInstance
 }>(
   'data/loadActiveOffer',
-  async (_arg, {dispatch, extra: api}) => {
+  async (offerId, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${_arg}`);
       dispatch(setDataLoadedStatus(true));
+      const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${offerId}`);
       dispatch(loadActiveOffer(data));
       dispatch(setDataLoadedStatus(false));
     } catch (error) {
