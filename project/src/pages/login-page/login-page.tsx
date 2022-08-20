@@ -1,16 +1,14 @@
 import { FormEvent, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AppRoute, locations } from '../../const';
+import { Link } from 'react-router-dom';
+import { locations } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 
 function LoginPage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -18,7 +16,6 @@ function LoginPage(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-
     if (loginRef.current !== null && passwordRef.current !== null) {
       onSubmit({
         login: loginRef.current.value,
@@ -62,7 +59,6 @@ function LoginPage(): JSX.Element {
             <button
               className="login__submit form__submit button"
               type="submit"
-              onClick={() => navigate(AppRoute.Favorites)}
             >
               Sign in
             </button>
@@ -70,9 +66,9 @@ function LoginPage(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <a className="locations__item-link" href="#">
+            <Link to='/' className="locations__item-link">
               <span>{locations.Paris.name}</span>
-            </a>
+            </Link>
           </div>
         </section>
       </div>

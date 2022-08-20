@@ -1,6 +1,7 @@
 import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
 import { generatePath, Link } from 'react-router-dom';
+import { ratingLength } from '../../utils';
 
 type Props = {
   offer: Offer;
@@ -17,6 +18,7 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
   const handleMouseLeave = () => {
     onMouseLeave();
   };
+  const rating = ratingLength(offer.rating);
   return (
     <article className={`${className}card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {offer.isPremium && (
@@ -43,7 +45,7 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80 %' }} />
+            <span style={{ width: rating }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

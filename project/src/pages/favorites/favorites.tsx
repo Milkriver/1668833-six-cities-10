@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
 
 function Favorites(): JSX.Element {
-  const { offers } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  useEffect(() => {
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
+
   return (
     <div className="page">
       <Header />

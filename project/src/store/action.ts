@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AppRoute, AuthorizationStatus } from '../const';
 import { City, Offer, Review } from '../types/offer';
+import { UserData } from '../types/user-data';
 
 
 export const getCity = createAction<{city: City}>('offers/getCity');
@@ -13,3 +14,4 @@ export const redirectToRoute = createAction<AppRoute>('offers/redirectToRoute');
 export const loadActiveOffer = createAction<Offer>('data/loadActiveOffer');
 export const loadFavoriteOffers = createAction<Offer[]>('offers/loadFavoriteOffers');
 export const loadNearByOffers = createAction<Offer[]>('offers/loadNearByOffers');
+export const getUserData = createAction<UserData | null>('user/loadUserData');

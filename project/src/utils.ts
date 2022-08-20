@@ -1,6 +1,7 @@
 import { sortOptionList } from './const';
 import { Offer } from './types/offer';
 
+const STARS_NUMBER = 5;
 export const sortCityOffers = (offers: Offer[], city: string) => (
   offers.filter((offer) => offer.city.name === city)
 );
@@ -17,3 +18,5 @@ export const sortOfferList = (selectedSortOption: string, offers: Offer[]) => {
       return offers;
   }
 };
+
+export const ratingLength = (rating: number): string => `${Math.round(rating) / STARS_NUMBER * 100}%`;

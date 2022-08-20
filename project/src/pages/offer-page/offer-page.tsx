@@ -11,6 +11,7 @@ import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
+import { ratingLength } from '../../utils';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -41,7 +42,7 @@ function OfferPage(): JSX.Element {
     dispatch(fetchActiveOfferAction(Number(id)));
     return <LoadingScreen />;
   }
-
+  const rating = ratingLength(activeOffer.rating);
   return (
     <div className="page">
       <Header />
@@ -68,7 +69,7 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80 %' }}></span>
+                  <span style={{ width: rating }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{activeOffer.rating}</span>

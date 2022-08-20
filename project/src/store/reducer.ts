@@ -2,7 +2,8 @@ import { locations } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
 import { City, Offer, Review } from '../types/offer';
-import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers } from './action';
+import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers, getUserData } from './action';
+import { UserData } from '../types/user-data';
 
 type InitialState = {
   city: City,
@@ -14,6 +15,7 @@ type InitialState = {
   favoriteOffers: Offer[],
   comments: Review[];
   nearByOffers: Offer[],
+  userData: UserData | null,
 }
 
 const initialState: InitialState = {
@@ -26,6 +28,7 @@ const initialState: InitialState = {
   favoriteOffers: [],
   comments: [],
   nearByOffers: [],
+  userData: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -50,6 +53,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(getUserData, (state, action) => {
+      state.userData = action.payload;
     })
     .addCase(loadNearByOffers, (state, action) => {
       state.nearByOffers = action.payload;
