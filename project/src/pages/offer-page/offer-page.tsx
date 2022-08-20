@@ -1,24 +1,46 @@
 import { useState } from 'react';
-import AddReviewForm from '../../components/add-review-form/add-review-form';
+// import AddReviewForm from '../../components/add-review-form/add-review-form';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
+import ReviewList from '../../components/review-list/review-list';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 // import ReviewList from '../../components/review-list/review-list';
 import { locations } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchActiveOfferAction, fetchCommentsAction } from '../../store/api-actions';
+import LoadingScreen from '../loading-screen/loading-screen';
 import { Offer } from '../../types/offer';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 function OfferPage(): JSX.Element {
-  const { offers, activeOffer } = useAppSelector((state) => state);
+  const offers = useAppSelector((state) => state.offers);
+  const {activeOffer} = useAppSelector((state) => state);
+  const {id} = useParams();
+  const dispatch = useAppDispatch();
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
+
+
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
     setSelectedOffer(currentOffer);
   };
 
-  if (activeOffer === undefined) {
+  useEffect(() => {
+    if(activeOffer === undefined) {
+      return;
+    }
+    dispatch(fetchCommentsAction(activeOffer.id));
+  }, [activeOffer, dispatch]);
+
+  if (isNaN(Number(id))) {
     return <NotFoundScreen />;
+  }
+
+  if (activeOffer === undefined) {
+    dispatch(fetchActiveOfferAction(Number(id)));
+    return <LoadingScreen />;
   }
 
   return (
@@ -88,8 +110,8 @@ function OfferPage(): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{'offer.reviews.length'}</span></h2>
-                {/* <ReviewList reviews={offer.reviews} /> */}
-                <AddReviewForm />
+                <ReviewList offerId={activeOffer.id} />
+                {/* <AddReviewForm /> */}
               </section>
             </div>
           </div>

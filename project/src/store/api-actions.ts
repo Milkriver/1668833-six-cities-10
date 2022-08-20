@@ -1,7 +1,7 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
-import { loadActiveOffer, loadFavoriteOffers, loadNearByOffers, loadOffers, redirectToRoute, requireAuthorization, setDataLoadedStatus, loadComments } from './action';
+import { loadOffers, redirectToRoute, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer } from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {AuthData} from '../types/auth-data';
@@ -15,7 +15,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance
 }
 >(
-  'data/loadHotels',
+  'data/fetchHotels',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Hotels);
@@ -24,48 +24,17 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
+export const fetchCommentsAction = createAsyncThunk<void, number | undefined, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
 }
 >(
-  'offers/loadFavoriteOffers',
-  async (_arg, {dispatch, extra: api}) => {
-    dispatch(setDataLoadedStatus(true));
-    const {data} = await api.get<Offer[]>(APIRoute.Favorites);
-    dispatch(loadFavoriteOffers(data));
-    dispatch(setDataLoadedStatus(false));
-  },
-);
-
-export const fetchNearByOffersAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}
->(
-  'offers/loadNearByOffers',
+  'offers/fetchComments',
   async (offerId, {dispatch, extra: api}) => {
-    dispatch(setDataLoadedStatus(true));
-    const {data} = await api.get<Offer[]>(`${APIRoute.Hotels}/${offerId}/nearby`);
-    dispatch(loadNearByOffers(data));
-    dispatch(setDataLoadedStatus(false));
-  },
-);
-
-export const fetchCommentsAction = createAsyncThunk<void, undefined, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance
-}
->(
-  'offers/loadComments',
-  async (offerId, {dispatch, extra: api}) => {
-    dispatch(setDataLoadedStatus(true));
     const {data} = await api.get<Review[]>(`${APIRoute.Comments}/${offerId}`);
+
     dispatch(loadComments(data));
-    dispatch(setDataLoadedStatus(false));
   },
 );
 
@@ -74,7 +43,7 @@ export const fetchActiveOfferAction = createAsyncThunk<void, number, {
   state: State,
   extra: AxiosInstance
 }>(
-  'data/loadActiveOffer',
+  'data/fetchActiveOffer',
   async (offerId, {dispatch, extra: api}) => {
     try {
       const {data} = await api.get<Offer>(`${APIRoute.Hotels}/${offerId}`);
@@ -84,6 +53,7 @@ export const fetchActiveOfferAction = createAsyncThunk<void, number, {
     }
   },
 );
+
 
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch,
@@ -130,3 +100,34 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
+
+// export const fetchFavoriteOffersAction = createAsyncThunk<void, undefined, {
+//   dispatch: AppDispatch,
+//   state: State,
+//   extra: AxiosInstance
+// }
+// >(
+//   'offers/loadFavoriteOffers',
+//   async (_arg, {dispatch, extra: api}) => {
+//     dispatch(setDataLoadedStatus(true));
+//     const {data} = await api.get<Offer[]>(APIRoute.Favorites);
+//     dispatch(loadFavoriteOffers(data));
+//     dispatch(setDataLoadedStatus(false));
+//   },
+// );
+
+// export const fetchNearByOffersAction = createAsyncThunk<void, undefined, {
+//   dispatch: AppDispatch,
+//   state: State,
+//   extra: AxiosInstance
+// }
+// >(
+//   'offers/loadNearByOffers',
+//   async (offerId, {dispatch, extra: api}) => {
+//     dispatch(setDataLoadedStatus(true));
+//     const {data} = await api.get<Offer[]>(`${APIRoute.Hotels}/${offerId}/nearby`);
+//     dispatch(loadNearByOffers(data));
+//     dispatch(setDataLoadedStatus(false));
+//   },
+// );
+
