@@ -2,9 +2,9 @@ import { locations } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
 import { City, Offer, Review } from '../types/offer';
-import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer } from './action';
+import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers } from './action';
 
-type InitalState = {
+type InitialState = {
   city: City,
   offers: Offer[],
   selectedSortOption: string,
@@ -16,7 +16,7 @@ type InitalState = {
   nearByOffers: Offer[],
 }
 
-const initialState: InitalState = {
+const initialState: InitialState = {
   city: locations.Paris,
   offers: [],
   selectedSortOption: 'Popular',
@@ -50,14 +50,13 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(loadNearByOffers, (state, action) => {
+      state.nearByOffers = action.payload;
+    })
+    .addCase(loadFavoriteOffers, (state, action) => {
+      state.favoriteOffers = action.payload;
     });
-  // .addCase(loadNearByOffers, (state, action) => {
-  //   state.nearByOffers = action.payload;
-  // })
-
-  // .addCase(loadFavoriteOffers, (state, action) => {
-  //   state.favoriteOffers = action.payload;
-  // })
 });
 
 export { reducer };

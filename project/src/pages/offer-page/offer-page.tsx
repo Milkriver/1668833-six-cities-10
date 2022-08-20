@@ -1,37 +1,36 @@
 import { useState } from 'react';
-// import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Header from '../../components/header/header';
-import ReviewList from '../../components/review-list/review-list';
-import Map from '../../components/map/map';
-import OfferList from '../../components/offer-list/offer-list';
-// import ReviewList from '../../components/review-list/review-list';
-import { locations } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchActiveOfferAction, fetchCommentsAction } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { Offer } from '../../types/offer';
+import Map from '../../components/map/map';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import OfferList from '../../components/offer-list/offer-list';
+import ReviewList from '../../components/review-list/review-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
+import { Offer } from '../../types/offer';
 
 function OfferPage(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const {activeOffer} = useAppSelector((state) => state);
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
+  const activeOffer = useAppSelector((state) => state.activeOffer);
+  const comments = useAppSelector((state) => state.comments);
+  const nearByOffers = useAppSelector((state) => state.nearByOffers);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-
-
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
     setSelectedOffer(currentOffer);
   };
 
   useEffect(() => {
-    if(activeOffer === undefined) {
+    if (activeOffer === undefined) {
       return;
     }
     dispatch(fetchCommentsAction(activeOffer.id));
+    dispatch(fetchNearByOffersAction(activeOffer.id));
   }, [activeOffer, dispatch]);
 
   if (isNaN(Number(id))) {
@@ -109,19 +108,19 @@ function OfferPage(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{'offer.reviews.length'}</span></h2>
-                <ReviewList offerId={activeOffer.id} />
-                {/* <AddReviewForm /> */}
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
+                <ReviewList comments={comments} />
+                <AddReviewForm />
               </section>
             </div>
           </div>
-          <Map city={locations.Paris} offers={offers} selectedOffer={selectedOffer} className='property__' />
+          <Map city={activeOffer.city} offers={nearByOffers} selectedOffer={selectedOffer} className='property__' />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='near-places__' />
+              <OfferList offers={nearByOffers} offerHoverHandler={offerHoverHandler} className='near-places__' />
             </div>
           </section>
         </div>

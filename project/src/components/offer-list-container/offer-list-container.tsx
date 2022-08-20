@@ -7,7 +7,8 @@ import OfferList from '../offer-list/offer-list';
 import SortOptionList from '../sort-option-list/sort-option-list';
 
 function OfferListContainer(): JSX.Element {
-  const { offers, city } = useAppSelector((state) => state);
+  const offers = useAppSelector((state) => state.offers);
+  const city = useAppSelector((state) => state.city);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);

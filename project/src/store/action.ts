@@ -11,6 +11,5 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 export const redirectToRoute = createAction<AppRoute>('offers/redirectToRoute');
 export const loadActiveOffer = createAction<Offer>('data/loadActiveOffer');
-
-// export const loadFavoriteOffers = createAction<Offer[]>('offers/loadFavoriteOffers');
-// export const loadNearByOffers = createAction<Offer[]>('offers/loadNearByOffers');
+export const loadFavoriteOffers = createAction<Offer[]>('offers/loadFavoriteOffers');
+export const loadNearByOffers = createAction<Offer[]>('offers/loadNearByOffers');
