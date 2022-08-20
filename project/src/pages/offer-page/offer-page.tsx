@@ -116,7 +116,7 @@ function OfferPage(): JSX.Element {
                 {
                   (authorizationStatus === AuthorizationStatus.Auth)
                     ?
-                    < AddReviewForm />
+                    < AddReviewForm activeOfferId = {activeOffer.id}/>
                     :
                     ''
                 }

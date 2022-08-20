@@ -1,8 +1,8 @@
-import { Review } from '../../types/offer';
+import { ReviewResponse } from '../../types/offer';
 import { ratingLength } from '../../utils';
 
 type Props = {
-  review: Review;
+  review: ReviewResponse;
 };
 
 function ReviewItem({ review }: Props): JSX.Element {

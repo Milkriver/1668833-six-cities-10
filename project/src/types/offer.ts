@@ -42,7 +42,7 @@ export type City = {
   },
 };
 
-export type Review = {
+export type ReviewResponse = {
   comment: string
   date: string
   id: number
@@ -52,5 +52,13 @@ export type Review = {
     id: number
     isPro: boolean
     name: string
+  }
+};
+
+export type ReviewRequest = {
+  offerId: number,
+  review: {
+    comment: string
+    rating: number
   }
 };

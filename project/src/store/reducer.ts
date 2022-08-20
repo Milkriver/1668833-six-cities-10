@@ -1,7 +1,7 @@
 import { locations } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
-import { City, Offer, Review } from '../types/offer';
+import { City, Offer, ReviewResponse } from '../types/offer';
 import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers, getUserData } from './action';
 import { UserData } from '../types/user-data';
 
@@ -13,7 +13,7 @@ type InitialState = {
   isDataLoaded: boolean,
   activeOffer: Offer | undefined,
   favoriteOffers: Offer[],
-  comments: Review[];
+  comments: ReviewResponse[];
   nearByOffers: Offer[],
   userData: UserData | null,
 }
