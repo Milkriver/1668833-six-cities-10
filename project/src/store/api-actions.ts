@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
-import { loadOffers, redirectToRoute, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer, loadFavoriteOffers, loadNearByOffers, getUserData, setNewComment } from './action';
+import { loadOffers, redirectToRoute, setDataLoadedStatus, loadComments, loadActiveOffer, loadFavoriteOffers, loadNearByOffers, getUserData, setNewComment } from './action';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
+import { APIRoute, AppRoute } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { Offer, ReviewRequest, ReviewResponse } from '../types/offer.js';
@@ -74,12 +74,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 >(
   'user/checkAuth',
   async (_arg, { dispatch, extra: api }) => {
-    try {
-      await api.get(APIRoute.Login);
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
+    await api.get(APIRoute.Login);
   },
 );
 
@@ -94,7 +89,6 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
     saveToken(data.token);
     dispatch(getUserData(data));
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
     dispatch(redirectToRoute(AppRoute.Favorites));
   },
 );
@@ -109,7 +103,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, { dispatch, extra: api }) => {
     await api.delete(APIRoute.Logout);
     dropToken();
-    dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
 
@@ -135,8 +128,6 @@ export const addNewCommentAction = createAsyncThunk<void, ReviewRequest, {
   'offers/addNewComment',
   async ({ offerId, review }, { dispatch, extra: api }) => {
     const { data } = await api.post<ReviewRequest>(`${APIRoute.Comments}/${offerId}`, review);
-    // eslint-disable-next-line no-console
-    console.log(data);
     dispatch(setNewComment(data));
   },
 );

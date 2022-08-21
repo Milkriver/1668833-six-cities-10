@@ -1,15 +1,13 @@
 import { locations } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../const';
 import { City, Offer, ReviewResponse } from '../types/offer';
-import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers, getUserData } from './action';
+import { getCity, changeSortOption, loadOffers, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers, getUserData } from './action';
 import { UserData } from '../types/user-data';
 
 type InitialState = {
   city: City,
   offers: Offer[],
   selectedSortOption: string,
-  authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,
   activeOffer: Offer | undefined,
   favoriteOffers: Offer[],
@@ -22,7 +20,6 @@ const initialState: InitialState = {
   city: locations.Paris,
   offers: [],
   selectedSortOption: 'Popular',
-  authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
   activeOffer: undefined,
   favoriteOffers: [],
@@ -50,9 +47,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
-    })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
     })
     .addCase(getUserData, (state, action) => {
       state.userData = action.payload;
