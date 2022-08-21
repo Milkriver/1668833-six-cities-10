@@ -1,28 +1,50 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import Header from '../../components/header/header';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Map from '../../components/map/map';
-import OfferList from '../../components/offer-list/offer-list';
-// import ReviewList from '../../components/review-list/review-list';
-import { locations } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { Offer } from '../../types/offer';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import OfferList from '../../components/offer-list/offer-list';
+import ReviewList from '../../components/review-list/review-list';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
+import { Offer } from '../../types/offer';
+import { ratingLength } from '../../utils';
+import { AuthorizationStatus } from '../../const';
 
 function OfferPage(): JSX.Element {
-  const { offers, activeOffer } = useAppSelector((state) => state);
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
+  const activeOffer = useAppSelector((state) => state.activeOffer);
+  const comments = useAppSelector((state) => state.comments);
+  const nearByOffers = useAppSelector((state) => state.nearByOffers);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
     setSelectedOffer(currentOffer);
   };
 
-  if (activeOffer === undefined) {
+  useEffect(() => {
+    if (activeOffer === undefined) {
+      return;
+    }
+    dispatch(fetchCommentsAction(activeOffer.id));
+    dispatch(fetchNearByOffersAction(activeOffer.id));
+  }, [activeOffer, dispatch]);
+
+  if (isNaN(Number(id))) {
     return <NotFoundScreen />;
   }
 
+  if (activeOffer === undefined) {
+    dispatch(fetchActiveOfferAction(Number(id)));
+    return <LoadingScreen />;
+  }
+  const rating = ratingLength(activeOffer.rating);
   return (
     <div className="page">
       <Header />
@@ -49,7 +71,7 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80 %' }}></span>
+                  <span style={{ width: rating }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{activeOffer.rating}</span>
@@ -89,19 +111,25 @@ function OfferPage(): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{'offer.reviews.length'}</span></h2>
-                {/* <ReviewList reviews={offer.reviews} /> */}
-                <AddReviewForm />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
+                <ReviewList comments={comments} />
+                {
+                  (authorizationStatus === AuthorizationStatus.Auth)
+                    ?
+                    < AddReviewForm activeOfferId = {activeOffer.id}/>
+                    :
+                    ''
+                }
               </section>
             </div>
           </div>
-          <Map city={locations.Paris} offers={offers} selectedOffer={selectedOffer} className='property__' />
+          <Map city={activeOffer.city} offers={nearByOffers} selectedOffer={selectedOffer} className='property__' />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={offers} offerHoverHandler={offerHoverHandler} className='near-places__' />
+              <OfferList offers={nearByOffers} offerHoverHandler={offerHoverHandler} className='near-places__' />
             </div>
           </section>
         </div>

@@ -1,25 +1,31 @@
 import { locations } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../const';
-import { City, Offer } from '../types/offer';
-import { getCity, changeSortOption, loadOffers, requireAuthorization, setDataLoadedStatus, loadActiveOffer } from './action';
+import { City, Offer, ReviewResponse } from '../types/offer';
+import { getCity, changeSortOption, loadOffers, setDataLoadedStatus, loadComments, loadActiveOffer, loadNearByOffers, loadFavoriteOffers, getUserData } from './action';
+import { UserData } from '../types/user-data';
 
-type InitalState = {
+type InitialState = {
   city: City,
   offers: Offer[],
   selectedSortOption: string,
-  authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,
   activeOffer: Offer | undefined,
+  favoriteOffers: Offer[],
+  comments: ReviewResponse[];
+  nearByOffers: Offer[],
+  userData: UserData | null,
 }
 
-const initialState: InitalState = {
+const initialState: InitialState = {
   city: locations.Paris,
   offers: [],
   selectedSortOption: 'Popular',
-  authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
   activeOffer: undefined,
+  favoriteOffers: [],
+  comments: [],
+  nearByOffers: [],
+  userData: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -36,11 +42,20 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadActiveOffer, (state, action) => {
       state.activeOffer = action.payload;
     })
+    .addCase(loadComments, (state, action) => {
+      state.comments = action.payload;
+    })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
     })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
+    .addCase(getUserData, (state, action) => {
+      state.userData = action.payload;
+    })
+    .addCase(loadNearByOffers, (state, action) => {
+      state.nearByOffers = action.payload;
+    })
+    .addCase(loadFavoriteOffers, (state, action) => {
+      state.favoriteOffers = action.payload;
     });
 });
 

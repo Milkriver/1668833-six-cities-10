@@ -12,7 +12,9 @@ import HistoryRouter from '../history-route/history-route';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
-  const { authorizationStatus, isDataLoaded } = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
     return (
       <LoadingScreen />

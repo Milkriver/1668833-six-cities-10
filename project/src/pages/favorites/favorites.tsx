@@ -1,20 +1,18 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
-import { useAppSelector } from '../../hooks';
-import { Offer } from '../../types/offer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
 
 function Favorites(): JSX.Element {
-  const { offers } = useAppSelector((state) => state);
-  const [, setSelectedOffer] = useState<Offer | undefined>(
-    undefined
-  );
-  const offerHoverHandler = (offerId: number | undefined) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-    setSelectedOffer(currentOffer);
-  };
+  const dispatch = useAppDispatch();
+  const offers = useAppSelector((state) => state.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  useEffect(() => {
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
+
   return (
     <div className="page">
       <Header />
@@ -25,7 +23,6 @@ function Favorites(): JSX.Element {
             <h1 className="favorites__title">Saved listing</h1>
 
             <ul className="favorites__list">
-
               <li className="favorites__locations-items">
                 <div className="favorites__locations locations locations--current">
                   <div className="locations__item">
@@ -35,7 +32,7 @@ function Favorites(): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  <OfferList offers={favoriteOffers} offerHoverHandler={offerHoverHandler} className='favorites__' />
+                  <OfferList offers={favoriteOffers} className='favorites__' />
                 </div>
               </li>
             </ul>
