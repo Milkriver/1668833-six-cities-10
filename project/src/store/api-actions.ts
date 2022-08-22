@@ -21,7 +21,7 @@ export const fetchOffersAction = createAsyncThunk<Offer[], undefined, {
   },
 );
 
-export const fetchCommentsAction = createAsyncThunk<Review[], number | undefined, {
+export const fetchCommentsAction = createAsyncThunk<Review[], number, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance
@@ -34,7 +34,7 @@ export const fetchCommentsAction = createAsyncThunk<Review[], number | undefined
   },
 );
 
-export const fetchNearByOffersAction = createAsyncThunk<Offer[], number | undefined, {
+export const fetchNearByOffersAction = createAsyncThunk<Offer[], number, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance

@@ -12,10 +12,9 @@ function OfferList({ offers, offerHoverHandler, className }: Props): JSX.Element
   const [activeCardId, setActiveCardId] = useState<number | undefined>();
   const handleOfferCardMouseEnter = (id: number | undefined) => {
     setActiveCardId(id);
-    if (offerHoverHandler !== undefined) {
+    if (offerHoverHandler) {
       offerHoverHandler(id);
     }
-
   };
   const handleOfferCardMouseLeave = () => {
     setActiveCardId(undefined);

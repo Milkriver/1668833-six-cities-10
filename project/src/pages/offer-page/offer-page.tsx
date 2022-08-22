@@ -31,19 +31,18 @@ function OfferPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (activeOffer === undefined) {
-      return;
+    if (activeOffer) {
+      dispatch(fetchActiveOfferAction(Number(id)));
+      dispatch(fetchCommentsAction(Number(id)));
+      dispatch(fetchNearByOffersAction(Number(id)));
     }
-    dispatch(fetchCommentsAction(activeOffer.id));
-    dispatch(fetchNearByOffersAction(activeOffer.id));
-  }, [activeOffer, dispatch]);
+  }, [id, dispatch, activeOffer]);
 
   if (isNaN(Number(id))) {
     return <NotFoundScreen />;
   }
 
-  if (activeOffer === undefined) {
-    dispatch(fetchActiveOfferAction(Number(id)));
+  if (!activeOffer) {
     return <LoadingScreen />;
   }
   return (
@@ -114,13 +113,7 @@ function OfferPage(): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 <ReviewList comments={comments} />
-                {
-                  (authorizationStatus === AuthorizationStatus.Auth)
-                    ?
-                    < AddReviewForm activeOfferId = {activeOffer.id}/>
-                    :
-                    ''
-                }
+                {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm activeOfferId = {activeOffer.id}/>}
               </section>
             </div>
           </div>
