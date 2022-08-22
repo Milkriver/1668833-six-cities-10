@@ -5,12 +5,11 @@ import { getRagingPercentage } from '../../utils';
 
 type Props = {
   offer: Offer;
-  activeCardId: number | undefined,
   onMouseEnter: (id: number | undefined) => void;
   onMouseLeave: () => void;
   className: string;
 }
-function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className }: Props): JSX.Element {
+function OfferCard({ offer, onMouseLeave, onMouseEnter, className }: Props): JSX.Element {
   const handleMouseEnter = () => {
     onMouseEnter(offer.id);
   };

@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { addNewCommentAction, fetchCommentsAction } from '../../store/api-actions';
 import { ReviewRequest } from '../../types/offer';
@@ -17,15 +17,13 @@ const ratingStars = [
 
 function AddReviewForm({ activeOfferId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
-  const commentRef = useRef<HTMLTextAreaElement | null>(null);
-  const ratingRef = useRef<HTMLInputElement | null>(null);
-  const [, setComment] = useState<string | undefined>();
-  const [, setRating] = useState<string | undefined>();
+  const [comment, setComment] = useState<string>('');
+  const [rating, setRating] = useState<string | undefined>();
   const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(event.currentTarget.value);
+    setComment(event.target.value);
   };
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRating(event.currentTarget.value);
+    setRating(event.target.value);
   };
   const onSubmit = ({ review, offerId }: ReviewRequest) => {
     dispatch(addNewCommentAction({ review, offerId }));
@@ -34,11 +32,11 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (commentRef.current !== null && ratingRef.current !== null) {
+    if (comment !== null && rating !== null) {
       onSubmit({
         review: {
-          comment: commentRef.current.value,
-          rating: Number(ratingRef.current.value),
+          comment: comment,
+          rating: Number(rating),
         },
         offerId: activeOfferId
       });
@@ -57,7 +55,6 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
               id={`${star.id}-stars`}
               type="radio"
               onChange={handleRatingChange}
-              ref={ratingRef}
             />
             <label
               htmlFor={`${star.id}-stars`}
@@ -75,9 +72,9 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
-        ref={commentRef}
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleReviewChange}
+        value={comment}
       >
       </textarea>
       <div className="reviews__button-wrapper">
