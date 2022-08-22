@@ -11,17 +11,19 @@ import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
-import { ratingLength } from '../../utils';
+import { getRagingPercentage } from '../../utils';
 import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { loadActiveOffer, loadComments, loadNearByOffers, loadOffers } from '../../store/offer-process/selectors';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
-  const activeOffer = useAppSelector((state) => state.activeOffer);
-  const comments = useAppSelector((state) => state.comments);
-  const nearByOffers = useAppSelector((state) => state.nearByOffers);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offers = useAppSelector(loadOffers);
+  const activeOffer = useAppSelector(loadActiveOffer);
+  const comments = useAppSelector(loadComments);
+  const nearByOffers = useAppSelector(loadNearByOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
@@ -44,7 +46,6 @@ function OfferPage(): JSX.Element {
     dispatch(fetchActiveOfferAction(Number(id)));
     return <LoadingScreen />;
   }
-  const rating = ratingLength(activeOffer.rating);
   return (
     <div className="page">
       <Header />
@@ -71,7 +72,7 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: rating }}></span>
+                  <span style={{ width: getRagingPercentage(activeOffer.rating) }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{activeOffer.rating}</span>
