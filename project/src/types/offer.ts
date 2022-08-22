@@ -42,7 +42,7 @@ export type City = {
   },
 };
 
-export type ReviewResponse = {
+export type Review = {
   comment: string
   date: string
   id: number

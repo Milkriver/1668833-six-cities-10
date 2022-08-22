@@ -1,8 +1,8 @@
 import { locations } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { getCity } from '../../store/action';
 import LocationItem from '../location-item/location-item';
 import { City } from '../../types/offer';
+import { getCity } from '../../store/offer-process/offer-process';
 
 
 type Props = {

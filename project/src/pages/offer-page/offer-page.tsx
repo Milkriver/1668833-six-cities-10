@@ -11,17 +11,19 @@ import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
-import { ratingLength } from '../../utils';
+import { getRagingPercentage } from '../../utils';
 import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { loadActiveOffer, loadComments, loadNearByOffers, loadOffers } from '../../store/offer-process/selectors';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
-  const activeOffer = useAppSelector((state) => state.activeOffer);
-  const comments = useAppSelector((state) => state.comments);
-  const nearByOffers = useAppSelector((state) => state.nearByOffers);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offers = useAppSelector(loadOffers);
+  const activeOffer = useAppSelector(loadActiveOffer);
+  const comments = useAppSelector(loadComments);
+  const nearByOffers = useAppSelector(loadNearByOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
@@ -29,22 +31,20 @@ function OfferPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (activeOffer === undefined) {
-      return;
+    if (activeOffer) {
+      dispatch(fetchActiveOfferAction(Number(id)));
+      dispatch(fetchCommentsAction(Number(id)));
+      dispatch(fetchNearByOffersAction(Number(id)));
     }
-    dispatch(fetchCommentsAction(activeOffer.id));
-    dispatch(fetchNearByOffersAction(activeOffer.id));
-  }, [activeOffer, dispatch]);
+  }, [id, dispatch, activeOffer]);
 
   if (isNaN(Number(id))) {
     return <NotFoundScreen />;
   }
 
-  if (activeOffer === undefined) {
-    dispatch(fetchActiveOfferAction(Number(id)));
+  if (!activeOffer) {
     return <LoadingScreen />;
   }
-  const rating = ratingLength(activeOffer.rating);
   return (
     <div className="page">
       <Header />
@@ -71,7 +71,7 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: rating }}></span>
+                  <span style={{ width: getRagingPercentage(activeOffer.rating) }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{activeOffer.rating}</span>
@@ -113,13 +113,7 @@ function OfferPage(): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 <ReviewList comments={comments} />
-                {
-                  (authorizationStatus === AuthorizationStatus.Auth)
-                    ?
-                    < AddReviewForm activeOfferId = {activeOffer.id}/>
-                    :
-                    ''
-                }
+                {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm activeOfferId = {activeOffer.id}/>}
               </section>
             </div>
           </div>

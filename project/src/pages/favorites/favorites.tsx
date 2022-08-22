@@ -4,10 +4,11 @@ import Header from '../../components/header/header';
 import OfferList from '../../components/offer-list/offer-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import { loadFavoriteOffers } from '../../store/offer-process/selectors';
 
 function Favorites(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(loadFavoriteOffers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   useEffect(() => {
     dispatch(fetchFavoriteOffersAction());

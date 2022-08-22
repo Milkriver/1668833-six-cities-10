@@ -1,12 +1,11 @@
-import { ReviewResponse } from '../../types/offer';
-import { ratingLength } from '../../utils';
+import { Review } from '../../types/offer';
+import { getRagingPercentage } from '../../utils';
 
 type Props = {
-  review: ReviewResponse;
+  review: Review;
 };
 
 function ReviewItem({ review }: Props): JSX.Element {
-  const rating = ratingLength(review.rating);
   return (
     <li className="reviews__item" key={review.user.name}>
       <div className="reviews__user user">
@@ -18,7 +17,7 @@ function ReviewItem({ review }: Props): JSX.Element {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: rating }}></span>
+            <span style={{ width: getRagingPercentage(review.rating) }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

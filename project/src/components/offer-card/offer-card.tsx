@@ -1,16 +1,15 @@
 import { AppRoute } from '../../const';
 import { Offer } from '../../types/offer';
 import { generatePath, Link } from 'react-router-dom';
-import { ratingLength } from '../../utils';
+import { getRagingPercentage } from '../../utils';
 
 type Props = {
   offer: Offer;
-  activeCardId: number | undefined,
   onMouseEnter: (id: number | undefined) => void;
   onMouseLeave: () => void;
   className: string;
 }
-function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className }: Props): JSX.Element {
+function OfferCard({ offer, onMouseLeave, onMouseEnter, className }: Props): JSX.Element {
   const handleMouseEnter = () => {
     onMouseEnter(offer.id);
   };
@@ -18,7 +17,6 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
   const handleMouseLeave = () => {
     onMouseLeave();
   };
-  const rating = ratingLength(offer.rating);
   return (
     <article className={`${className}card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {offer.isPremium && (
@@ -45,7 +43,7 @@ function OfferCard({ offer, onMouseLeave, activeCardId, onMouseEnter, className 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: rating }} />
+            <span style={{ width: getRagingPercentage(offer.rating) }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

@@ -19,4 +19,4 @@ export const sortOfferList = (selectedSortOption: string, offers: Offer[]) => {
   }
 };
 
-export const ratingLength = (rating: number): string => `${Math.round(rating) / STARS_NUMBER * 100}%`;
+export const getRagingPercentage = (rating: number): string => `${Math.round(rating) / STARS_NUMBER * 100}%`;
