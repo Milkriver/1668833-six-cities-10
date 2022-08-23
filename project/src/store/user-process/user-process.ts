@@ -1,22 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthorizationStatus, NameSpace } from '../../const';
-import { UserData } from '../../types/user-data';
 import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus,
-  userData: UserData | null | void,
+  userEmail: string,
 };
 
 const initialState: UserProcess = {
   authorizationStatus: AuthorizationStatus.Unknown,
-  userData: null,
+  userEmail: '',
 };
 
 export const userProcess = createSlice({
   name: NameSpace.User,
   initialState,
-  reducers: {},
+  reducers: {
+    getUserEmail: (state, action) => {
+      state.userEmail = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(loginAction.rejected, (state) => {
@@ -24,7 +27,6 @@ export const userProcess = createSlice({
       })
       .addCase(loginAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
-        state.userData = action.payload;
       })
       .addCase(logoutAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
@@ -37,3 +39,5 @@ export const userProcess = createSlice({
       });
   }
 });
+
+export const {getUserEmail} = userProcess.actions;

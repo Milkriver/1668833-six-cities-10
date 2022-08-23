@@ -2,13 +2,13 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
-import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
+import { selectAuthorizationStatus, selectUserEmail } from '../../store/user-process/selectors';
 import Logo from '../logo/logo';
 
 function Header(): JSX.Element {
   const dispatch = useAppDispatch();
-  const email = useAppSelector(getUserData);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userEmail = useAppSelector(selectUserEmail);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   return (
     <header className="header">
       <div className="container">
@@ -26,7 +26,7 @@ function Header(): JSX.Element {
                     <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">{email}</span>
+                      <span className="header__user-name user__name">{(userEmail) ? userEmail : ''}</span>
                       <span className="header__favorite-count">3</span>
                     </Link>
                   </li>

@@ -13,17 +13,17 @@ import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } 
 import { Offer } from '../../types/offer';
 import { getRagingPercentage } from '../../utils';
 import { AuthorizationStatus } from '../../const';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { loadActiveOffer, loadComments, loadNearByOffers, loadOffers } from '../../store/offer-process/selectors';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import { selectActiveOffer, selectComments, selectNearByOffers, selectOffers } from '../../store/offer-process/selectors';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const offers = useAppSelector(loadOffers);
-  const activeOffer = useAppSelector(loadActiveOffer);
-  const comments = useAppSelector(loadComments);
-  const nearByOffers = useAppSelector(loadNearByOffers);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offers = useAppSelector(selectOffers);
+  const activeOffer = useAppSelector(selectActiveOffer);
+  const comments = useAppSelector(selectComments);
+  const nearByOffers = useAppSelector(selectNearByOffers);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
@@ -32,11 +32,12 @@ function OfferPage(): JSX.Element {
 
   useEffect(() => {
     if (activeOffer) {
+      dispatch(fetchCommentsAction(activeOffer.id));
+      dispatch(fetchNearByOffersAction(activeOffer.id));
+    } else {
       dispatch(fetchActiveOfferAction(Number(id)));
-      dispatch(fetchCommentsAction(Number(id)));
-      dispatch(fetchNearByOffersAction(Number(id)));
     }
-  }, [id, dispatch, activeOffer]);
+  }, [dispatch, activeOffer, id]);
 
   if (isNaN(Number(id))) {
     return <NotFoundScreen />;
@@ -113,7 +114,7 @@ function OfferPage(): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 <ReviewList comments={comments} />
-                {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm activeOfferId = {activeOffer.id}/>}
+                {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm activeOfferId={activeOffer.id} />}
               </section>
             </div>
           </div>
