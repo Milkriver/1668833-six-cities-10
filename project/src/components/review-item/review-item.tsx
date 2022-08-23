@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { Review } from '../../types/offer';
 import { getRagingPercentage } from '../../utils';
 
@@ -6,6 +7,7 @@ type Props = {
 };
 
 function ReviewItem({ review }: Props): JSX.Element {
+  const date = dayjs(review.date).format('MMMM YYYY');
   return (
     <li className="reviews__item" key={review.user.name}>
       <div className="reviews__user user">
@@ -22,7 +24,7 @@ function ReviewItem({ review }: Props): JSX.Element {
           </div>
         </div>
         <p className="reviews__text">{review.comment}</p>
-        <time className="reviews__time" dateTime={review.date}>{review.date}</time>
+        <time className="reviews__time" dateTime={review.date}>{date}</time>
       </div>
     </li>
   );
