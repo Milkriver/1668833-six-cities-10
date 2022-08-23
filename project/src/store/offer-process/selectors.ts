@@ -10,3 +10,4 @@ export const selectComments = (state: State): Review[] => state[NameSpace.Data].
 export const selectNearByOffers = (state: State): Offer[] => state[NameSpace.Data].nearByOffers;
 export const selectFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
 export const selectLoadedDataStatus = (state: State): boolean => state[NameSpace.Data].isDataLoaded;
+export const selectFavoriteOffersNumber = (state: State): number => state[NameSpace.Data].favoriteOffers.length;

@@ -9,10 +9,10 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import OfferList from '../../components/offer-list/offer-list';
 import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
+import { changeFavoriteOfferStatusAction, fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
 import { getRagingPercentage } from '../../utils';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, FavoriteStatusActions } from '../../const';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 import { selectActiveOffer, selectComments, selectNearByOffers, selectOffers } from '../../store/offer-process/selectors';
 
@@ -46,6 +46,12 @@ function OfferPage(): JSX.Element {
   if (!activeOffer) {
     return <LoadingScreen />;
   }
+  const handleClick = () => {
+    dispatch(changeFavoriteOfferStatusAction({
+      offerId: activeOffer.id.toString(),
+      FavoriteStatus: activeOffer.isFavorite ? FavoriteStatusActions.REMOVE : FavoriteStatusActions.ADD,
+    }));
+  };
   return (
     <div className="page">
       <Header />
@@ -63,7 +69,10 @@ function OfferPage(): JSX.Element {
               {activeOffer.isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{activeOffer.title}</h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={`property__bookmark-button button ${activeOffer.isFavorite && 'property__bookmark-button--active'}`} onClick={handleClick}
+                  type="button"
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

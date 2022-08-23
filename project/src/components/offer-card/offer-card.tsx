@@ -1,7 +1,9 @@
-import { AppRoute } from '../../const';
+import { AppRoute, FavoriteStatusActions } from '../../const';
 import { Offer } from '../../types/offer';
 import { generatePath, Link } from 'react-router-dom';
 import { getRagingPercentage } from '../../utils';
+import { changeFavoriteOfferStatusAction } from '../../store/api-actions';
+import { useAppDispatch } from '../../hooks';
 
 type Props = {
   offer: Offer;
@@ -10,12 +12,20 @@ type Props = {
   className: string;
 }
 function OfferCard({ offer, onMouseLeave, onMouseEnter, className }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
   const handleMouseEnter = () => {
     onMouseEnter(offer.id);
   };
 
   const handleMouseLeave = () => {
     onMouseLeave();
+  };
+
+  const handleClick = () => {
+    dispatch(changeFavoriteOfferStatusAction({
+      offerId: offer.id.toString(),
+      FavoriteStatus: offer.isFavorite ? FavoriteStatusActions.REMOVE : FavoriteStatusActions.ADD,
+    }));
   };
   return (
     <article className={`${className}card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
@@ -34,7 +44,7 @@ function OfferCard({ offer, onMouseLeave, onMouseEnter, className }: Props): JSX
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button className={`place-card__bookmark-button button ${offer.isFavorite && 'place-card__bookmark-button--active'}`} onClick={handleClick} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark" />
             </svg>
