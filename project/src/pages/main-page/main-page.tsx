@@ -2,10 +2,10 @@ import Header from '../../components/header/header';
 import LocationList from '../../components/location-list/location-list';
 import OfferListContainer from '../../components/offer-list-container/offer-list-container';
 import { useAppSelector } from '../../hooks';
-import { getSelectedCity } from '../../store/offer-process/selectors';
+import { selectCity } from '../../store/offer-process/selectors';
 
 function MainPage(): JSX.Element {
-  const city = useAppSelector(getSelectedCity);
+  const city = useAppSelector(selectCity);
   return (
     <div className="page page--gray page--main">
       <Header />

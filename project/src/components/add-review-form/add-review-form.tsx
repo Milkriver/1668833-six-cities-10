@@ -15,10 +15,14 @@ const ratingStars = [
   { title: 'terribly', id: 1, },
 ];
 
+const minCommentLength = 50;
+const maxCommentLength = 300;
+const notSelectedRating = '0';
+
 function AddReviewForm({ activeOfferId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
-  const [rating, setRating] = useState<string | undefined>();
+  const [rating, setRating] = useState<string | undefined>('0');
   const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
@@ -88,7 +92,13 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
             50 characters
           </b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit">Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={rating === notSelectedRating || comment.length <= minCommentLength || comment.length > maxCommentLength}
+        >
+          Submit
+        </button>
       </div>
     </form>
   );

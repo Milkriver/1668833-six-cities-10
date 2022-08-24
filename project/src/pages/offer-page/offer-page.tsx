@@ -9,21 +9,21 @@ import NotFoundScreen from '../not-found-screen/not-found-screen';
 import OfferList from '../../components/offer-list/offer-list';
 import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
+import { changeFavoriteOfferStatusAction, fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
 import { getRagingPercentage } from '../../utils';
-import { AuthorizationStatus } from '../../const';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { loadActiveOffer, loadComments, loadNearByOffers, loadOffers } from '../../store/offer-process/selectors';
+import { AuthorizationStatus, FavoriteStatusActions } from '../../const';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
+import { selectActiveOffer, selectComments, selectNearByOffers, selectOffers } from '../../store/offer-process/selectors';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const offers = useAppSelector(loadOffers);
-  const activeOffer = useAppSelector(loadActiveOffer);
-  const comments = useAppSelector(loadComments);
-  const nearByOffers = useAppSelector(loadNearByOffers);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offers = useAppSelector(selectOffers);
+  const activeOffer = useAppSelector(selectActiveOffer);
+  const comments = useAppSelector(selectComments);
+  const nearByOffers = useAppSelector(selectNearByOffers);
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
   const offerHoverHandler = (offerId: number | undefined) => {
     const currentOffer = offers.find((offer) => offer.id === offerId);
@@ -32,11 +32,12 @@ function OfferPage(): JSX.Element {
 
   useEffect(() => {
     if (activeOffer) {
+      dispatch(fetchCommentsAction(activeOffer.id));
+      dispatch(fetchNearByOffersAction(activeOffer.id));
+    } else {
       dispatch(fetchActiveOfferAction(Number(id)));
-      dispatch(fetchCommentsAction(Number(id)));
-      dispatch(fetchNearByOffersAction(Number(id)));
     }
-  }, [id, dispatch, activeOffer]);
+  }, [dispatch, activeOffer, id]);
 
   if (isNaN(Number(id))) {
     return <NotFoundScreen />;
@@ -45,6 +46,12 @@ function OfferPage(): JSX.Element {
   if (!activeOffer) {
     return <LoadingScreen />;
   }
+  const handleClick = () => {
+    dispatch(changeFavoriteOfferStatusAction({
+      offerId: activeOffer.id.toString(),
+      FavoriteStatus: activeOffer.isFavorite ? FavoriteStatusActions.REMOVE : FavoriteStatusActions.ADD,
+    }));
+  };
   return (
     <div className="page">
       <Header />
@@ -62,7 +69,10 @@ function OfferPage(): JSX.Element {
               {activeOffer.isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{activeOffer.title}</h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={`property__bookmark-button button ${activeOffer.isFavorite && 'property__bookmark-button--active'}`} onClick={handleClick}
+                  type="button"
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -113,7 +123,7 @@ function OfferPage(): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 <ReviewList comments={comments} />
-                {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm activeOfferId = {activeOffer.id}/>}
+                {authorizationStatus === AuthorizationStatus.Auth && <AddReviewForm activeOfferId={activeOffer.id} />}
               </section>
             </div>
           </div>

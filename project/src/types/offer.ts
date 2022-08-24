@@ -62,3 +62,8 @@ export type ReviewRequest = {
     rating: number
   }
 };
+
+export type FavoriteOfferData = {
+  'offerId': string,
+  'FavoriteStatus': number,
+}

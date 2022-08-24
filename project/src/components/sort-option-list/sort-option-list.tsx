@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { sortOptionList } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeSortOption } from '../../store/offer-process/offer-process';
-import { getSortOption } from '../../store/offer-process/selectors';
+import { selectSortOption } from '../../store/offer-process/selectors';
 import { Offer } from '../../types/offer';
 import { sortOfferList } from '../../utils';
 
@@ -13,7 +13,7 @@ type Props = {
 
 function SortOptionList({ offers }: Props): JSX.Element {
   const [isSortMenuOpened, setIsSortMenuOpened] = useState(false);
-  const selectedSortOption = useAppSelector(getSortOption);
+  const selectedSortOption = useAppSelector(selectSortOption);
   const dispatch = useAppDispatch();
   sortOfferList(selectedSortOption, offers);
   const openSortMenuHandler = () => {

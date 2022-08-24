@@ -45,33 +45,17 @@ export const offerProcess = createSlice({
         state.offers = action.payload;
         state.isDataLoaded = false;
       })
-      .addCase(fetchFavoriteOffersAction.pending, (state) => {
-        state.isDataLoaded = true;
-      })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
-        state.isDataLoaded = false;
-      })
-      .addCase(fetchCommentsAction.pending, (state) => {
-        state.isDataLoaded = true;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
         state.comments = action.payload;
-        state.isDataLoaded = false;
-      })
-      .addCase(fetchNearByOffersAction.pending, (state) => {
-        state.isDataLoaded = true;
       })
       .addCase(fetchNearByOffersAction.fulfilled, (state, action) => {
         state.nearByOffers = action.payload;
-        state.isDataLoaded = false;
-      })
-      .addCase(fetchActiveOfferAction.pending, (state) => {
-        state.isDataLoaded = true;
       })
       .addCase(fetchActiveOfferAction.fulfilled, (state, action) => {
         state.activeOffer = action.payload;
-        state.isDataLoaded = false;
       });
   },
 });
