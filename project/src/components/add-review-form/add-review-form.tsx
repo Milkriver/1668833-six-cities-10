@@ -21,20 +21,23 @@ const MAX_COMMENT_LENGTH = 300;
 function AddReviewForm({ activeOfferId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
   const [comment, setComment] = useState<string>('');
-  const [rating, setRating] = useState<string | undefined>(undefined);
+  const [rating, setRating] = useState<number | undefined>(undefined);
+  const [statusSubmit, setStatusSubmit] = useState(false);
   const handleReviewChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(event.target.value);
   };
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRating(event.target.value);
+    setRating(Number(event.target.value));
   };
   const onSubmit = ({ review, offerId }: ReviewRequest) => {
     dispatch(addNewCommentAction({ review, offerId }));
     dispatch(fetchCommentsAction(offerId));
+    setStatusSubmit(false);
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setStatusSubmit(true);
     if (comment !== null && rating !== null) {
       onSubmit({
         review: {
@@ -43,6 +46,8 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
         },
         offerId: activeOfferId
       });
+      setComment('');
+      setRating(undefined);
     }
   };
   return (
@@ -58,6 +63,7 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
               id={`${star.id}-stars`}
               type="radio"
               onChange={handleRatingChange}
+              checked={rating === star.id}
             />
             <label
               htmlFor={`${star.id}-stars`}
@@ -94,7 +100,7 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!rating || comment.length <= MIN_COMMENT_LENGTH || comment.length > MAX_COMMENT_LENGTH}
+          disabled={!rating || comment.length <= MIN_COMMENT_LENGTH || comment.length > MAX_COMMENT_LENGTH || statusSubmit}
         >
           Submit
         </button>
