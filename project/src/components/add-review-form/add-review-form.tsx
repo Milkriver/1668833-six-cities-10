@@ -15,9 +15,9 @@ const ratingStars = [
   { title: 'terribly', id: 1, },
 ];
 
-const minCommentLength = 50;
-const maxCommentLength = 300;
-const notSelectedRating = '0';
+const MIN_COMMENT_LENGTH = 50;
+const MAX_COMMENT_LENGTH = 300;
+const NOT_SELECTED_RATING = '0';
 
 function AddReviewForm({ activeOfferId }: Props): JSX.Element {
   const dispatch = useAppDispatch();
@@ -95,7 +95,7 @@ function AddReviewForm({ activeOfferId }: Props): JSX.Element {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={rating === notSelectedRating || comment.length <= minCommentLength || comment.length > maxCommentLength}
+          disabled={rating === NOT_SELECTED_RATING || comment.length <= MIN_COMMENT_LENGTH || comment.length > MAX_COMMENT_LENGTH}
         >
           Submit
         </button>
