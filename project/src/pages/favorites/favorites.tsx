@@ -23,35 +23,42 @@ function Favorites(): JSX.Element {
   return (
     <div className="page">
       <Header />
-
-      <main className="page__main page__main--favorites">
+      <main className={`page__main page__main--favorites ${(favoriteOffers.length > 0) ? '' : 'page__main--favorites-empty'}`}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-
-            <ul className="favorites__list">
-              {favoriteCities.map((city) =>
-                (
-                  <li className="favorites__locations-items" key={city}>
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <a className="locations__item-link" href="#">
-                          <span>{city}</span>
-                        </a>
+          <section className={`favorites ${(favoriteOffers.length > 0) ? '' : 'favorites--empty'}`}>
+            {(favoriteOffers.length > 0) ?
+              <>
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {favoriteCities.map((city) => (
+                    <li className="favorites__locations-items" key={city}>
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <div className="locations__item-link">
+                            <span>{city}</span>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="favorites__places">
-                      <OfferList offers={favoriteOffers.filter((offer) => offer.city.name === city)} className='favorites__' />
-                    </div>
-                  </li>
-                ))}
-            </ul>
-
+                      <div className="favorites__places">
+                        <OfferList offers={favoriteOffers.filter((offer) => offer.city.name === city)} className='favorites__' />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </>
+              :
+              <>
+                <h1 className="visually-hidden">Favorites (empty)</h1>
+                <div className="favorites__status-wrapper">
+                  <b className="favorites__status">Nothing yet saved.</b>
+                  <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+                </div>
+              </>}
           </section>
         </div>
-      </main>
+      </main >
       <Footer />
-    </div>
+    </div >
   );
 }
 

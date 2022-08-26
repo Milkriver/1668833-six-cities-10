@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
@@ -10,34 +9,25 @@ import OfferList from '../../components/offer-list/offer-list';
 import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeFavoriteOfferStatusAction, fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
-import { Offer } from '../../types/offer';
 import { getRagingPercentage } from '../../utils';
-import { AuthorizationStatus, FavoriteStatusActions } from '../../const';
+import { AppRoute, AuthorizationStatus, FavoriteStatusActions } from '../../const';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
-import { selectActiveOffer, selectComments, selectNearByOffers, selectOffers } from '../../store/offer-process/selectors';
+import { selectActiveOffer, selectComments, selectNearByOffers } from '../../store/offer-process/selectors';
+import { redirectToRoute } from '../../store/action';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const offers = useAppSelector(selectOffers);
   const activeOffer = useAppSelector(selectActiveOffer);
   const comments = useAppSelector(selectComments);
   const nearByOffers = useAppSelector(selectNearByOffers);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-  const [selectedOffer, setSelectedOffer] = useState<Offer | undefined>();
-  const offerHoverHandler = (offerId: number | undefined) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-    setSelectedOffer(currentOffer);
-  };
 
   useEffect(() => {
-    if (activeOffer) {
-      dispatch(fetchCommentsAction(activeOffer.id));
-      dispatch(fetchNearByOffersAction(activeOffer.id));
-    } else {
-      dispatch(fetchActiveOfferAction(Number(id)));
-    }
-  }, [dispatch, activeOffer, id]);
+    dispatch(fetchCommentsAction(Number(id)));
+    dispatch(fetchNearByOffersAction(Number(id)));
+    dispatch(fetchActiveOfferAction(Number(id)));
+  }, [dispatch, id]);
 
   if (isNaN(Number(id))) {
     return <NotFoundScreen />;
@@ -51,6 +41,13 @@ function OfferPage(): JSX.Element {
       offerId: activeOffer.id.toString(),
       FavoriteStatus: activeOffer.isFavorite ? FavoriteStatusActions.REMOVE : FavoriteStatusActions.ADD,
     }));
+  };
+  const handleFavoriteStatus = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      handleClick();
+    } else {
+      dispatch(redirectToRoute(AppRoute.Login));
+    }
   };
   return (
     <div className="page">
@@ -70,11 +67,11 @@ function OfferPage(): JSX.Element {
               <div className="property__name-wrapper">
                 <h1 className="property__name">{activeOffer.title}</h1>
                 <button
-                  className={`property__bookmark-button button ${activeOffer.isFavorite && 'property__bookmark-button--active'}`} onClick={handleClick}
+                  className={`property__bookmark-button button ${activeOffer.isFavorite && 'place-card__bookmark-button--active'}`} onClick={handleFavoriteStatus}
                   type="button"
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
+                  <svg className="place-card__bookmark-icon" width="31" height="33">
+                    <use xlinkHref="#icon-bookmark" />
                   </svg>
                   <span className="visually-hidden">{(activeOffer.isFavorite) ? 'In bookmarks' : 'To bookmarks'}</span>
                 </button>
@@ -113,7 +110,7 @@ function OfferPage(): JSX.Element {
                     {activeOffer.host.name}
                   </span>
                   <span className="property__user-status">
-                    {activeOffer.host.isPro}
+                    {(activeOffer.host.isPro) ? 'Pro' : ''}
                   </span>
                 </div>
                 <div className="property__description">
@@ -127,13 +124,13 @@ function OfferPage(): JSX.Element {
               </section>
             </div>
           </div>
-          <Map city={activeOffer.city} offers={nearByOffers} selectedOffer={selectedOffer} className='property__' />
+          <Map city={activeOffer.city} offers={[...nearByOffers, activeOffer]} selectedOffer={activeOffer} className='property__' />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OfferList offers={nearByOffers} offerHoverHandler={offerHoverHandler} className='near-places__' />
+              <OfferList offers={nearByOffers} className='near-places__' />
             </div>
           </section>
         </div>

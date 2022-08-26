@@ -59,8 +59,8 @@ export const locations: Record<string, City> = {
   Cologne: {
     name: 'Cologne',
     location: {
-      latitude: 45.5774872,
-      longitude: 9.939068899999999,
+      latitude: 50.938361,
+      longitude: 6.959974,
       zoom: 13
     }
   },
