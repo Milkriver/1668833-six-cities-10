@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { locations } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
-import { getUserEmail } from '../../store/user-process/user-process';
+import { saveUserEmail } from '../../store/user-process/user-process';
 import { AuthData } from '../../types/auth-data';
 
 function LoginPage(): JSX.Element {
@@ -13,7 +13,7 @@ function LoginPage(): JSX.Element {
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
-    dispatch(getUserEmail(authData.login));
+    dispatch(saveUserEmail(authData.login));
   };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {

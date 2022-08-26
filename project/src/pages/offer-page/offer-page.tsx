@@ -31,13 +31,10 @@ function OfferPage(): JSX.Element {
   };
 
   useEffect(() => {
-    if (activeOffer) {
-      dispatch(fetchCommentsAction(activeOffer.id));
-      dispatch(fetchNearByOffersAction(activeOffer.id));
-    } else {
-      dispatch(fetchActiveOfferAction(Number(id)));
-    }
-  }, [dispatch, activeOffer, id]);
+    dispatch(fetchCommentsAction(Number(id)));
+    dispatch(fetchNearByOffersAction(Number(id)));
+    dispatch(fetchActiveOfferAction(Number(id)));
+  }, [dispatch, id]);
 
   if (isNaN(Number(id))) {
     return <NotFoundScreen />;

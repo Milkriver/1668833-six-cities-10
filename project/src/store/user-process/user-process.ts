@@ -16,7 +16,7 @@ export const userProcess = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {
-    getUserEmail: (state, action) => {
+    saveUserEmail: (state, action) => {
       state.userEmail = action.payload;
     },
   },
@@ -40,4 +40,4 @@ export const userProcess = createSlice({
   }
 });
 
-export const {getUserEmail} = userProcess.actions;
+export const { saveUserEmail } = userProcess.actions;
