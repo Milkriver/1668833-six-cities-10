@@ -40,14 +40,6 @@ export const URL_MARKER_DEFAULT = 'img/pin.svg';
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
 export const locations: Record<string, City> = {
-  Amsterdam: {
-    name: 'Amsterdam',
-    location: {
-      latitude: 52.37454,
-      longitude: 4.897976,
-      zoom: 13
-    }
-  },
   Paris: {
     name: 'Paris',
     location: {
@@ -69,6 +61,14 @@ export const locations: Record<string, City> = {
     location: {
       latitude: 50.8504,
       longitude: 4.34878,
+      zoom: 13
+    }
+  },
+  Amsterdam: {
+    name: 'Amsterdam',
+    location: {
+      latitude: 52.37454,
+      longitude: 4.897976,
       zoom: 13
     }
   },

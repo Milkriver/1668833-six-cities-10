@@ -10,7 +10,7 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import OfferPage from '../../pages/offer-page/offer-page';
 import { selectLoadedDataStatus } from '../../store/offer-process/selectors';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import PrivateRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
