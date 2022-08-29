@@ -1,13 +1,23 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { locations } from '../../const';
-import { useAppDispatch } from '../../hooks';
+import { AppRoute, AuthorizationStatus, locations } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { redirectToRoute } from '../../store/action';
 import { loginAction } from '../../store/api-actions';
+import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 import { saveUserEmail } from '../../store/user-process/user-process';
 import { AuthData } from '../../types/auth-data';
 
 function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(redirectToRoute(AppRoute.Main));
+    }
+  }, [dispatch, authorizationStatus]);
+
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
@@ -55,7 +65,7 @@ function LoginPage(): JSX.Element {
                 ref={passwordRef}
                 type="password"
                 name="password"
-                pattern="^(?=.*[a-zA-Z])(?=\w*[0-9])\w{2}$"
+                pattern="^(?=.*[a-zA-Z])(?=\w*[0-9])\w{2,20}$"
                 title="Пароль должен состоять минимум из одной буквы и цифры."
                 placeholder="Password"
                 required
