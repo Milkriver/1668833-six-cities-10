@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: SortOptionList should render correctly 1`] = `
+<div>
+  <form
+    action="#"
+    class="places__sorting"
+    method="get"
+  >
+    <span
+      class="places__sorting-caption"
+    >
+      Sort by
+    </span>
+    <span
+      class="places__sorting-type"
+    >
+      Popular
+      <svg
+        class="places__sorting-arrow"
+        height="4"
+        width="7"
+      >
+        <use
+          xlink:href="#icon-arrow-select"
+        />
+      </svg>
+    </span>
+  </form>
+</div>
+`;

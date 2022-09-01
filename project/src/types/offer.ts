@@ -8,7 +8,7 @@ export type Offer = {
     }
   },
   previewImage: string,
-  images: [],
+  images: string[],
   title: string,
   isFavorite: boolean,
   isPremium: boolean,
@@ -17,7 +17,7 @@ export type Offer = {
   bedrooms: number,
   maxAdults: number,
   price: number,
-  goods: [],
+  goods: string[],
   host: {
     id: number,
     name: string,
@@ -30,7 +30,7 @@ export type Offer = {
     longitude: number,
     zoom: number,
   },
-  id: 1
+  id: number
 }
 
 export type City = {

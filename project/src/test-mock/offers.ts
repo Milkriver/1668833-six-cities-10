@@ -1,4 +1,6 @@
-export const mockOffers = [
+import { Offer } from '../types/offer';
+
+export const mockOffers: Offer[] = [
   {
     city: {
       name: 'Dusseldorf',
