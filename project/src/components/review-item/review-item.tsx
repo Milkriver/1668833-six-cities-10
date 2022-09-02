@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Review } from '../../types/offer';
-import { getRagingPercentage } from '../../utils';
+import { getRagingPercentage } from '../../utils/utils';
 
 type Props = {
   review: Review;

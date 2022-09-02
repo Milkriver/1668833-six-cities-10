@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import { selectCity, selectOffers } from '../../store/offer-process/selectors';
 import { Offer } from '../../types/offer';
-import { sortCityOffers } from '../../utils';
+import { sortCityOffers } from '../../utils/utils';
 import Map from '../map/map';
 import OfferList from '../offer-list/offer-list';
 import SortOptionList from '../sort-option-list/sort-option-list';

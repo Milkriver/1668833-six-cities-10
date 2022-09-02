@@ -9,7 +9,7 @@ import OfferList from '../../components/offer-list/offer-list';
 import ReviewList from '../../components/review-list/review-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeFavoriteOfferStatusAction, fetchActiveOfferAction, fetchCommentsAction, fetchNearByOffersAction } from '../../store/api-actions';
-import { getRagingPercentage } from '../../utils';
+import { getRagingPercentage } from '../../utils/utils';
 import { AppRoute, AuthorizationStatus, FavoriteStatusActions } from '../../const';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 import { selectActiveOffer, selectComments, selectNearByOffers } from '../../store/offer-process/selectors';

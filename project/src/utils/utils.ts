@@ -1,5 +1,5 @@
-import { sortOptionList } from './const';
-import { Offer } from './types/offer';
+import { sortOptionList } from '../const';
+import { Offer } from '../types/offer';
 
 const STARS_NUMBER = 5;
 export const sortCityOffers = (offers: Offer[], city: string) => (

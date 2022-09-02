@@ -3,25 +3,29 @@ import { createMemoryHistory } from 'history';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../../components/history-router/history-router';
-import SortOptionList from './sort-option-list';
+import { AuthorizationStatus, locations } from '../../const';
+import OfferListContainer from './offer-list-container';
 import { mockOffers } from '../../test-mock/offers';
-import { sortCityOffers } from '../../utils/utils';
+
 
 const mockStore = configureMockStore();
-
-describe('Component: SortOptionList', () => {
+describe('Component: OfferList', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const store = mockStore({
+      USER: {
+        authorizationStatus: AuthorizationStatus.Auth,
+      },
       DATA: {
-        selectedSortOption: 'Popular'
+        offers: mockOffers,
+        city: locations.Paris
       }
+
     });
-    const cityOffers = sortCityOffers(mockOffers, mockOffers[0].city.name);
     const { container } = render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <SortOptionList offers={cityOffers} />
+          <OfferListContainer />
         </HistoryRouter>
       </Provider>);
     expect(container).toMatchSnapshot();
