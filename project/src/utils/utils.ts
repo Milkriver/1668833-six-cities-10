@@ -1,5 +1,5 @@
-import { sortOptionList } from './const';
-import { Offer } from './types/offer';
+import { sortOptionList } from '../const';
+import { Offer } from '../types/offer';
 
 const STARS_NUMBER = 5;
 export const sortCityOffers = (offers: Offer[], city: string) => (
@@ -18,5 +18,7 @@ export const sortOfferList = (selectedSortOption: string, offers: Offer[]) => {
       return offers;
   }
 };
+
+export const getRandomInteger = (max: number) => Math.floor(Math.random() * max);
 
 export const getRagingPercentage = (rating: number): string => `${Math.round(rating) / STARS_NUMBER * 100}%`;

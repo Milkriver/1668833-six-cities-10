@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeSortOption } from '../../store/offer-process/offer-process';
 import { selectSortOption } from '../../store/offer-process/selectors';
 import { Offer } from '../../types/offer';
-import { sortOfferList } from '../../utils';
+import { sortOfferList } from '../../utils/utils';
 
 type Props = {
   offers: Offer[];

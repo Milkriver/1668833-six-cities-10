@@ -1,7 +1,7 @@
 import { AppRoute, AuthorizationStatus, FavoriteStatusActions } from '../../const';
 import { Offer } from '../../types/offer';
 import { generatePath, Link } from 'react-router-dom';
-import { getRagingPercentage } from '../../utils';
+import { getRagingPercentage } from '../../utils/utils';
 import { changeFavoriteOfferStatusAction } from '../../store/api-actions';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { redirectToRoute } from '../../store/action';
