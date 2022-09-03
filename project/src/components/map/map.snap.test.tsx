@@ -10,7 +10,7 @@ const offers = mockOffers;
 const selectedOffer = mockOffers[0];
 
 const mockStore = configureMockStore();
-describe('Component: LocationList', () => {
+describe('Component: Map', () => {
   it('should render correctly', () => {
     const store = mockStore({});
     const { container } = render(

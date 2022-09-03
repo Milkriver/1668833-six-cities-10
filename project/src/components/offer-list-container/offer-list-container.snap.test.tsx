@@ -9,7 +9,7 @@ import { mockOffers } from '../../test-mock/offers';
 
 
 const mockStore = configureMockStore();
-describe('Component: OfferList', () => {
+describe('Component: OfferListContainer', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const store = mockStore({

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component: OfferList should render correctly 1`] = `
+exports[`Component: OfferListContainer should render correctly 1`] = `
 <div>
   <div
     class="cities__places-container container"
