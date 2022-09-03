@@ -19,4 +19,6 @@ export const sortOfferList = (selectedSortOption: string, offers: Offer[]) => {
   }
 };
 
+export const getRandomInteger = (max: number) => Math.floor(Math.random() * max);
+
 export const getRagingPercentage = (rating: number): string => `${Math.round(rating) / STARS_NUMBER * 100}%`;

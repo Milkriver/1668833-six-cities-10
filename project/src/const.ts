@@ -39,6 +39,8 @@ export const FavoriteStatusActions = {
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 
+export const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
 export const locations: Record<string, City> = {
   Paris: {
     name: 'Paris',

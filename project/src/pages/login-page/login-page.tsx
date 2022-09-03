@@ -1,12 +1,14 @@
 import { FormEvent, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus, locations } from '../../const';
+import { AppRoute, AuthorizationStatus, cities, locations } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { redirectToRoute } from '../../store/action';
 import { loginAction } from '../../store/api-actions';
+import { getCity } from '../../store/offer-process/offer-process';
 import { selectAuthorizationStatus } from '../../store/user-process/selectors';
 import { saveUserEmail } from '../../store/user-process/user-process';
 import { AuthData } from '../../types/auth-data';
+import { getRandomInteger } from '../../utils/utils';
 
 function LoginPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,6 +19,10 @@ function LoginPage(): JSX.Element {
       dispatch(redirectToRoute(AppRoute.Main));
     }
   }, [dispatch, authorizationStatus]);
+  const randomCity = locations[cities[getRandomInteger(cities.length)]];
+  const handleChangedCity = () => {
+    dispatch(getCity({ city: randomCity }));
+  };
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -81,8 +87,8 @@ function LoginPage(): JSX.Element {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            <Link to='/' className="locations__item-link">
-              <span>{locations.Paris.name}</span>
+            <Link to='/' className="locations__item-link" onClick={handleChangedCity}>
+              <span>{randomCity.name}</span>
             </Link>
           </div>
         </section>
