@@ -21,8 +21,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --passWithNoTests",
+    "coverage": "set CI=true && react-scripts test --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .tsx --ext .ts src/"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "/src/types/",
+      "/src/index.tsx"
+    ]
   },
   "eslintConfig": {
     "extends": [

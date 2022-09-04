@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: LoginPage should render correctly 1`] = `
+<div>
+  <main
+    class="page__main page__main--login"
+  >
+    <div
+      class="page__login-container container"
+    >
+      <section
+        class="login"
+      >
+        <h1
+          class="login__title"
+        >
+          Sign in
+        </h1>
+        <form
+          action="#"
+          class="login__form form"
+          method="post"
+        >
+          <div
+            class="login__input-wrapper form__input-wrapper"
+          >
+            <label
+              class="visually-hidden"
+            >
+              E-mail
+            </label>
+            <input
+              class="login__input form__input"
+              name="email"
+              placeholder="Email"
+              required=""
+              type="email"
+            />
+          </div>
+          <div
+            class="login__input-wrapper form__input-wrapper"
+          >
+            <label
+              class="visually-hidden"
+            >
+              Password
+            </label>
+            <input
+              class="login__input form__input"
+              name="password"
+              pattern="^(?=.*[a-zA-Z])(?=\\\\w*[0-9])\\\\w{2,20}$"
+              placeholder="Password"
+              required=""
+              title="Пароль должен состоять минимум из одной буквы и цифры."
+              type="password"
+            />
+          </div>
+          <button
+            class="login__submit form__submit button"
+            type="submit"
+          >
+            Sign in
+          </button>
+        </form>
+      </section>
+      <section
+        class="locations locations--login locations--current"
+      >
+        <div
+          class="locations__item"
+        >
+          <a
+            class="locations__item-link"
+            href="/"
+          >
+            <span>
+              Paris
+            </span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+`;
