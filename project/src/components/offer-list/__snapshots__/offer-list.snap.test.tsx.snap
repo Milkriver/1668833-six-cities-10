@@ -4,6 +4,7 @@ exports[`Component: OfferList should render correctly 1`] = `
 <div>
   <article
     class="cities__card place-card"
+    data-testid="offer-card__box"
   >
     <div
       class="cities__image-wrapper place-card__image-wrapper"
@@ -43,6 +44,7 @@ exports[`Component: OfferList should render correctly 1`] = `
         </div>
         <button
           class="place-card__bookmark-button button false"
+          data-testid="offer-card__favorite"
           type="button"
         >
           <svg
@@ -95,6 +97,7 @@ exports[`Component: OfferList should render correctly 1`] = `
   </article>
   <article
     class="cities__card place-card"
+    data-testid="offer-card__box"
   >
     <div
       class="cities__image-wrapper place-card__image-wrapper"
@@ -134,6 +137,7 @@ exports[`Component: OfferList should render correctly 1`] = `
         </div>
         <button
           class="place-card__bookmark-button button false"
+          data-testid="offer-card__favorite"
           type="button"
         >
           <svg

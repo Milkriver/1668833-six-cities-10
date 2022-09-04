@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component: OfferPage should render correctly 1`] = `
+<div>
+  <div
+    class="page page--gray page--main"
+  >
+    <header
+      class="header"
+    >
+      <div
+        class="container"
+      >
+        <div
+          class="header__wrapper"
+        >
+          <div
+            class="header__left"
+          >
+            <a
+              class="header__logo-link header__logo-link--active"
+              href="/"
+            >
+              <img
+                alt="6 cities logo"
+                class="header__logo"
+                height="41"
+                src="img/logo.svg"
+                width="81"
+              />
+            </a>
+          </div>
+          <nav
+            class="header__nav"
+          >
+            <ul
+              class="header__nav-list"
+            >
+              <li
+                class="header__nav-item user"
+              >
+                <a
+                  class="header__nav-link header__nav-link--profile"
+                  href="/favorites"
+                >
+                  <div
+                    class="header__avatar-wrapper user__avatar-wrapper"
+                  />
+                  <span
+                    class="header__user-name user__name"
+                  >
+                    ma@ya.ru
+                  </span>
+                  <span
+                    class="header__favorite-count"
+                  >
+                    0
+                  </span>
+                </a>
+              </li>
+              <li
+                class="header__nav-item"
+              >
+                <a
+                  class="header__nav-link"
+                  href="/"
+                >
+                  <span
+                    class="header__signout"
+                  >
+                    Sign out
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <h1>
+      404. Page not found
+    </h1>
+    <a
+      href="/"
+    >
+      Вернуться на главную
+    </a>
+  </div>
+</div>
+`;
